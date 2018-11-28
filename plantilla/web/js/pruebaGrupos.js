@@ -32,44 +32,82 @@ let data = {
         {
             name: 'Linuxen', 
             members: ['Linux1', 'Linux2', 'Linux3'],
-            status: "running"
+           
             
-        }
+        },
+        {
+            name: 'Linuxenssss', 
+            members: ['Linusssssx1', 'Linssssux2', 'Linussssx3'],
+            
+            
+        },
     ]
 }
 
-function creaLista(elem, members){
-    return "<li class='list-group-item'><input type='checkbox'>" + elem + "</li>";
+function crearLista(elem){
+    return "<h3 input type='checkbox'> " + elem + "</h3>";
 }
 
 function crearListaMiembros(members){
-    return "< id='miembro' class='list-group-item' data-nodeid=1'><input type='checkbox'>" + members + "</li>";
-
+    
+    let html = [];
+    //html.push( " <ul class='list-group-item'> " + name_group + "</ul>");
+    console.log(members);
+    console.log("pablo cara de culo");
+  // for(let i = 0; i < members.length; i++){ 
+        
+    return "<li class='list-group-item'><input type='checkbox'>" + members +  "</li>";
+  // }
+  
+    //return html;
 }
 
-//index se supone que es el id que le asignamos dinamicamente a cada fila de la tabla pero todavia no se como hacerlo
-function estadosLista(name, status, index) {
-    if (status == "running") {
-        return "<li class= 'list-group-item list-vms'> <input type='checkbox' onclick='functionCheck()' id="+index+"></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
-    }
-    else if (status == "suspended"){
-        return "<li class= 'list-group-item list-vms'> <input type='checkbox' onclick='functionCheck()' id="+index+"></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
-    }
-    else{
-        return "<li class= 'list-group-item list-vms'> <input type='checkbox' onclick='functionCheck()' id="+index+"></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
-    }
 
-}
+$("#replace").click(a => {
+    $("#listaMiembros").empty();
+    
+    for(let i = 0; i < data.groups.length; i++){          
+        $("#lista").append(crearLista(data.groups[i].name));
+        console.log("darki perfecto");
+        console.log(data.groups[i].name);
 
-$("#replace").click(e => {
-    $("#lista").empty();
-     data.groups.forEach(
-         m => $("#lista").append(creaLista(m.name)),
-         
-         mem =>$("miembro").append(crearListaMiembros(mem.members))
-     )
-   
+        for(let j = 0; j < data.groups[i].members.length; j++){    
+           // console.log(data.groups[i].members[j]);                  
+            $("#listaMiembros").append(crearListaMiembros(data.groups[i].members[j]));
+            //console.log(data.groups[1].members);
+        } 
+       
+    }
+    console.log("irene ganadora y preciosa");
 })
+
+
+
+
+
+$(".accordionUI")
+    .accordion({
+        collapsible: true,
+        heightStyle: "content",
+        header: "> div > h3",
+    })
+    .sortable({
+        axis:"y",
+        handle: "h3",
+        connectWith: ".accordionUI",
+        placeholder: "ui-state-highlight",
+        stop: function( event, ui ) {
+            // IE doesn't register the blur when sorting
+            // so trigger focusout handlers to remove .ui-state-focus
+            ui.item.children( "h3" ).triggerHandler( "focusout" );
+    
+            // Refresh accordion to handle new order
+            $( this ).accordion( "refresh" );
+        },
+        sort: function( event, ui ) {
+            $(ui.item).css("color", "red");
+        }
+    });
 
 
 
