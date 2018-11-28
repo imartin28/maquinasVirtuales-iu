@@ -41,10 +41,10 @@
                   </div>
               </div>
 			  <div class="panel-estados ml-4 mb-4 mt-4 ">
-                  <button class="btn boton-icono boton-encender mt-2 mr-3"><i class="material-icons">play_arrow</i>Play</button>
-                  <button class="btn boton-icono boton-reiniciar mt-2 mr-3"><i class="material-icons">replay</i>Restart</button>
-                  <button class="btn boton-icono boton-suspender mt-2 mr-3"><i class="material-icons">pause</i>Suspend</button>
-                  <button class="btn boton-icono boton-apagar mt-2 mr-3"><i class="material-icons">stop</i>Stop</button>
+                  <button class="btn boton-icono boton-encender mt-2 mr-3" id="play"><i class="material-icons">play_arrow</i>Play</button>
+                  <button class="btn boton-icono boton-reiniciar mt-2 mr-3" id="restart"><i class="material-icons">replay</i>Restart</button>
+                  <button class="btn boton-icono boton-suspender mt-2 mr-3" id="suspend"><i class="material-icons">pause</i>Suspend</button>
+                  <button class="btn boton-icono boton-apagar mt-2 mr-3" id="stop"><i class="material-icons">stop</i>Stop</button>
               </div> 
 				
 				<div class="col-12">
@@ -52,7 +52,7 @@
 				  <div class="row">
 						<ul class="list-group col-6 align-items-left" id="listaVM">
 						  <li class="list-group-item list-vms" data-nodeid="1">
-									<input type="checkbox" >
+									<input type="checkbox">
 									<span class="">VM 1</span>
 									<span class="badge badge-success mt-1"> </span>
 							</li>
@@ -285,11 +285,11 @@
                 <div class="form-group row">
                   <label class="col-3">RAM</label>
 				  <div class="col-6">
-                  <input type="range" class="col-12 custom-range" id="formControlRange">
+                  <input type="range" class="col-12 custom-range" id="formControlRange" min="0" >
                   </div>
 				  <div class="col-3 row d-flex flex-row align-items-center flex-nowrap">
 						
-							<input type="number" class="col-12 form-control">
+							<input type="number" class="col-12 form-control" id="inputRAM">
 							<span class="col-1">MB</span>
 							
 						
@@ -302,10 +302,10 @@
                 <div class="form-group row">
                     <label class="col-3">HDD</label>
                     <div class="col-6">                     
-                        <input type="range" class="col-12 custom-range" id="formControlRange">
+                        <input type="range" class="col-12 custom-range" id="storageRange" min="0">
                     </div>
 					<div class="col-3 row d-flex flex-row align-items-center flex-nowrap">
-						<input type="number" class="col-12 form-control">
+						<input type="number" class="col-12 form-control" id="inputHDD">
 						<span class="col-1">GB</span>
 						
 					  
