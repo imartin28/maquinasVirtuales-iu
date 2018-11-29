@@ -44,8 +44,9 @@ let data = {
     ]
 }
 
-function crearLista(elem){
-    return "<h3 input type='checkbox'> " + elem + "</h3>";
+function crearLista(elem, i){
+   return  "<h3 id='lista"+i+"' class='badge badge-danger ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-sortable-handle' role='tab' aria-selected='true' aria-expanded='true' tabindex='0'><span class='ui-accordion-header-icon ui-icon ui-icon-triangle-1-s'></span>VMs"+elem+ "</h3>"
+    
 }
 
 function crearListaMiembros(members){
@@ -67,16 +68,23 @@ $("#replace").click(a => {
     $("#listaMiembros").empty();
     
     for(let i = 0; i < data.groups.length; i++){          
-        $("#lista").append(crearLista(data.groups[i].name));
+       // $("#lista").append(crearLista(data.groups[i].name));
+       $("#acordeonC").append(crearLista(data.groups[i].name, i));
+       let cont = i + 1; 
+       $("#acordeonC").append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
+             
+       $("#ui-id-"+cont).append("<ul id=ul"+i+">");
         console.log("darki perfecto");
         console.log(data.groups[i].name);
 
         for(let j = 0; j < data.groups[i].members.length; j++){    
            // console.log(data.groups[i].members[j]);                  
-            $("#listaMiembros").append(crearListaMiembros(data.groups[i].members[j]));
+            $("#ul"+i).append(crearListaMiembros(data.groups[i].members[j]));
             //console.log(data.groups[1].members);
         } 
-       
+        $("#ui-id-"+cont).append("</ul>");
+        $("#acordeonC").append("</div>");
+
     }
     console.log("irene ganadora y preciosa");
 })
