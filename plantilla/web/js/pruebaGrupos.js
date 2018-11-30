@@ -1,5 +1,6 @@
 "use strict";
 
+$(function(){
 
 let data = {
     vms: [
@@ -44,6 +45,16 @@ let data = {
     ]
 }
 
+
+function init(){
+
+    loadGroup();
+
+
+}
+
+init();
+
 function crearLista(elem, i){
    return  "<h3 id='lista"+i+"' class='badge badge-danger ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-sortable-handle' role='tab' aria-selected='true' aria-expanded='true' tabindex='0'><span class='ui-accordion-header-icon ui-icon ui-icon-triangle-1-s'></span>VMs"+elem+ "</h3>"
     
@@ -63,8 +74,7 @@ function crearListaMiembros(members){
     //return html;
 }
 
-
-$("#replace").click(a => {
+function loadGroup(){
     $("#listaMiembros").empty();
     
     for(let i = 0; i < data.groups.length; i++){          
@@ -84,14 +94,9 @@ $("#replace").click(a => {
         } 
         $("#ui-id-"+cont).append("</ul>");
         $("#acordeonC").append("</div>");
-
     }
-    console.log("irene ganadora y preciosa");
-})
 
-
-
-
+};
 
 $(".accordionUI")
     .accordion({
@@ -118,4 +123,4 @@ $(".accordionUI")
     });
 
 
-
+});
