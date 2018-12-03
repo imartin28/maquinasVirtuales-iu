@@ -8,7 +8,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
 
     <title>PI</title>
   </head>
@@ -74,7 +77,7 @@
 						 
 						</ul>
 						<div class="col-6 panel-botones-vm">
-							<button type="button" class="btn boton-grupos boton-icono mb-3 ml-5 "> <i class="material-icons align-middle">edit</i>Modify MV</button>
+							<button type="button" id="botonModificar" class="btn boton-grupos boton-icono mb-3 ml-5 "> <i class="material-icons align-middle">edit</i>Modify MV</button>
 							<button type="button" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#addGroupModal">
 								<i class="material-icons align-middle">add_circle</i>Add Group
 							</button>
@@ -103,7 +106,7 @@
 												<div class="form-group row">
 													<div>
 													
-													  <ul class="list-group">
+													  <ul id="listaGruposVM" class="list-group">
 														<li class="list-group-item list-modal" data-nodeid="0">
 														  <input type="checkbox" >                     
 														  <span>Group1 </span>	  
@@ -143,7 +146,7 @@
 								</div>
 							</div>
 							<!-- fin del Modal -->
-							<button type="button" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#ExportModal">
+							<button type="button" id="btnExport" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#ExportModal">
 								<i class="material-icons align-middle">format_indent_decrease</i>Export
 							</button>
 							
@@ -172,7 +175,7 @@
 												<div class="form-group row">
 													<div>
 													
-													  <ul class="list-group">
+													  <ul id="listaVMModal" class="list-group">
 														<li class="list-group-item list-modal" data-nodeid="8">
 														  <input type="checkbox" >                     
 														  <span>VM1 </span>	  
@@ -240,7 +243,7 @@
 							
 								<!-- fin del Modal -->
 						
-							<button type="button"  class="btn btn-danger boton-icono mb-3 ml-5" data-toggle="modal" data-target="#deleteVM"><i class="material-icons align-middle">delete_outline</i>Delete VM</button>
+							<button type="button"  class="btn btn-danger boton-icono mb-3 ml-5 droppable" data-toggle="modal" data-target="#deleteVM"><i class="material-icons align-middle">delete_outline</i>Delete VM</button>
 
 							<!-- Modal delete  -->
 							<div class="modal fade" id="deleteVM" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -381,6 +384,7 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/pruebaVMS.js"></script>
   </body>
 </html>

@@ -98,6 +98,8 @@ function loadGroup(){
 
 };
 
+
+
 $(".accordionUI")
     .accordion({
         collapsible: true,
