@@ -1,0 +1,295 @@
+
+@import "https://fonts.googleapis.com/css?family=K2D";
+
+
+*{
+    font-family: 'K2D';
+}
+
+.container{
+    box-shadow: 0 0 15px #a4a4a4;
+    border-radius: 5px;     
+}
+
+.header{
+    background-image: linear-gradient(to right,white, orange, white);
+    height: 160px; 
+    padding:0;   
+}
+
+.nav-tab {
+    text-align: center;
+    
+}
+
+.nav-link{
+    color:black;
+    text-decoration: none;
+    
+}
+
+.imagen-logo{
+  width: 100px;
+  height: 100px;  
+}
+
+
+/*********     PANELES    *********/
+
+.panel-izq {
+    margin-top:40px;
+    margin-bottom: 40px;
+    border-right: 1px solid black;
+}
+
+.panel-derecho {
+    margin-top:40px;
+    margin-bottom: 20px;
+}
+
+.panel-botones-grupo{
+    display: flex;
+    flex-direction: column; 
+    padding-top: 100px;    
+}
+
+.panel-inferior-botones-grupos{
+    align-items: center;
+}
+
+.panel-estados{
+    display: flex;
+}
+
+
+/*********      BOTONES    *********/
+
+
+.boton-icono{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-aceptar{
+    background-color:orange;   
+}
+
+.boton-aceptar:hover{
+    background-color: white;
+    cursor:pointer;
+    border: 2px solid rgba(255, 166, 0, 0.685);
+}
+
+
+.boton-cancelar{
+    background-color: rgb(167, 166, 166);
+    border-radius:15px;
+}
+
+.boton-cancelar:hover{
+    background-color: white;
+    cursor:pointer;
+    border: 2px solid rgba(41, 39, 39, 0.041);   
+}
+
+.boton-grupos{  
+    border-radius: 15px;
+    background-color:rgb(252, 190, 74);
+}
+
+.boton-grupos:hover{
+    background-color: white;
+    cursor:pointer;
+    border: 2px solid rgba(255, 166, 0, 0.685);
+}
+
+.btn-danger{
+    border-radius:15px;    
+}
+
+.btn-danger:hover{
+    background-color:rgb(243, 155, 155);
+}
+
+.input-text{
+    border-right: none;
+    border-top: none;
+    border-left:none;
+    border-color: black;
+}
+
+.boton-encender{
+    border-radius: 15px;
+    background-color:rgb(247, 247, 247);
+    width: 150px;
+}
+
+.boton-encender:hover{
+    border-radius: 15px;
+    background-color:rgb(24, 216, 24);  
+}
+
+.boton-reiniciar{
+    border-radius: 15px;
+    background-color:rgb(247, 247, 247);
+    width: 150px;
+}
+
+.boton-reiniciar:hover{
+    border-radius: 15px;
+    background-color:rgb(219, 243, 7);
+}
+
+.boton-suspender{
+    border-radius: 15px;
+    background-color:rgb(247, 247, 247);
+    width: 150px;
+}
+
+.boton-suspender:hover{
+    border-radius: 15px;
+    background-color: yellow;
+}
+
+.boton-apagar{
+    border-radius: 15px;
+    background-color:rgb(247, 247, 247);
+    width: 150px;
+}
+
+.boton-apagar:hover{
+    border-radius: 15px;
+    background-color:red;
+}
+
+
+.badge {    
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;  
+    border-radius: 10px;
+}
+
+.list-group-item > .badge {
+  float: right;
+}
+
+.indent{
+    margin-left: 10px;
+    margin-right:10px;
+}
+
+.list-group-item:hover{
+    background-color:rgb(216, 214, 214);
+}
+.list-modal{
+	padding-left: 50px;
+	padding-right: 50px;
+}
+.search-modal{
+	width: 350px;
+}
+
+/************VM's*********************/
+
+
+.list-vms > .badge {
+	padding: 7px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.boton-mv{  
+    border-radius: 15px;
+    background-color:rgb(252, 190, 74);
+	font-size: 12px
+}
+.boton-mv:hover{
+    background-color: white;
+    cursor:pointer;
+    border: 2px solid rgba(255, 166, 0, 0.685);
+
+}
+
+ul{
+	text-align:left;
+}
+
+input[type='number']{
+	height: 25px;
+	
+	
+}
+.panel-botones-vm{
+    display: flex;
+    flex-direction: column;
+    
+}
+.form__email, .form__password, .form__button {
+  
+  padding: 0.618em 0;
+  width: 100%;
+  border: none;
+}
+
+.form__email, .form__password {
+  padding: 0.3em 0.6em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: #fafafa;
+  box-shadow: 0 0 1px #fff;
+  position: relative;
+  z-index: 0;
+}
+.form__email:focus, .form__password:focus {
+  outline: 0;
+  border-bottom: 1px solid #009688;
+  box-shadow: 0 0 1px #fff;
+}
+
+
+
+/*********      BUSCADOR    *********/
+
+.search-bar{  
+    border-radius:50px;
+	height: 35px;
+    box-shadow: 0px 0px 8px 0px orange; 
+  }
+  
+.search-bar input{     
+    padding: 0 10px ;
+    border-radius:50px;
+    outline: none;
+    border:none;   
+}
+
+.boton-buscar{      
+      background: rgba(255, 166, 0, 0.685);
+      border-radius:20px;
+      text-decoration: none;
+      text-align: center;
+     
+}
+
+.boton-buscar:hover{
+    background-color: orange;
+    cursor:pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

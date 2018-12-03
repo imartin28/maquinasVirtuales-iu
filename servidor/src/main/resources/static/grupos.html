@@ -1,0 +1,430 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"> -->
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+
+    <title>PI</title>
+  </head>
+  <body>
+    <!-- PRACTICA 6: tu contenido aqui -->
+    
+    <div class="row">
+      <div class="col-1 "></div>       
+      <div class="col-9 container mt-5">        
+        
+        <div class="header" >
+            <img src="img/logo.jpg" class="imagen-logo mt-3 ml-5 ">        
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="index.html">VM</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="">Groups</a>
+                </li>               
+            </ul>
+        </div> 
+        
+        <div class="row">
+          <div class="col-8 panel-izq">       
+              <div class="input-group search-bar mb-3">
+                  <input type="text" class="form-control" placeholder="Search...">
+                  <div class="input-group-append">
+                    <button class="btn boton-buscar" type="button">Search</button>
+                  </div>
+              </div>
+              
+              <div class="panel-estados ml-4 mb-4 mt-4 ">
+                  <button class="btn boton-icono boton-encender mt-2 mr-3"><i class="material-icons">play_arrow</i>Play</button>
+                  <button class="btn boton-icono boton-reiniciar mt-2 mr-3"><i class="material-icons">replay</i>Restart</button>
+                  <button class="btn boton-icono boton-suspender mt-2 mr-3"><i class="material-icons">pause</i>Suspend</button>
+                  <button class="btn boton-icono boton-apagar mt-2 mr-3"><i class="material-icons">stop</i>Stop</button>
+              </div>       
+             
+              <div class="col-12">
+                <h2>Groups</h2>
+                
+                    <div class="border border-primary"> 
+                                                                   
+                            <div  class=" accordionUI border border-warning">
+                                <div  class="border border-dark ml-5 mr-5" id="acordeonC"> 
+                                     
+                          
+                                  <!--                         
+                                    <h3   id="lista" class="badge badge-danger">VMs Fer</h3>                                   
+                                       <div >  --> <!--se tiene que quedar, es el div de dentro--> 
+                                        <!--  
+                                          <ul class="list-group">                                                            
+                                            <li id="listaMiembros" class="list-group-item">                                                
+                                                <input type="checkbox" >
+                                                <span> MV 2</span>
+                                                <span class="badge badge-danger">1</span>
+                                              </li>                                        
+                                        </ul>                                       
+                                    </div>
+                                </div> 
+                                <div  class="border border-dark ml-5 mr-5" id="acordeonC">                            
+                                  <h3   id="lista" class="badge badge-danger">VMs Yo</h3>                                   
+                                     <div >    
+                                        <ul class="list-group">                                                            
+                                          <li id="listaMiembros" class="list-group-item">                                                
+                                              <input type="checkbox" >
+                                              <span> MV 2</span>
+                                              <span class="badge badge-danger">1</span>
+                                            </li>                                        
+                                      </ul>                                       
+                                  </div>
+                              </div> 
+                            -->                              
+                            </div>                       
+                      </div> 
+                  <!--<ul id="lista" class="list-group">
+                    
+                    <div class="list-group-item" id="accordionUI" data-nodeid="0">
+                      <input type="checkbox" >     
+                                      
+                      <span>- Group1 </span>
+                      <span class="badge badge-danger ml-2">1</span>                
+                      <span class="badge badge-warning">2</span> 
+                      
+
+                      <div id="accordionUI" class="list-group-item" data-nodeid="1">
+                          <span class="indent"></span>
+                          <input type="checkbox" >
+                          <span>+ MV 1</span>
+                          <span class="badge badge-warning">2</span>
+                      </div>
+                    </div>
+                    
+                    
+                    <li class="list-group-item" id="2">
+                      <span class="indent"></span>
+                      <input type="checkbox" >
+                      <span> MV 2</span>
+                      <span class="badge badge-danger">1</span>
+                    </li>
+                    <li class="list-group-item" data-nodeid="4">
+                        <input type="checkbox" >
+                      <span>Group2</span>
+                      <span class="badge badge-danger">1</span>
+                    </li>
+                    <li class="list-group-item" data-nodeid="4">
+                        <input type="checkbox" >
+                      <span>Group3</span>
+                      <span class="badge badge-danger">1</span>
+                    </li>
+                    <li class="list-group-item" data-nodeid="5">
+                        <input type="checkbox" >
+                      <span >Group4</span>
+                      <span class="badge badge-warning">1</span>
+                    </li>
+                    <li class="list-group-item" data-nodeid="6">
+                        <input type="checkbox" >
+                      <span >Group5</span>             
+                      <span class="badge badge-success">1</span>
+                    </li>
+                  
+                  </ul>-->
+                </div>              
+                
+              </div> 
+           
+          </div>         
+
+          <div class="col-4 panel-derecho">            
+            <div class="panel-botones-grupo mt-5" >           
+              <button class=" btn boton-icono boton-grupos mt-2 justify-items-center" data-toggle="modal" data-target="#addVMModal"><i class="material-icons">add_circle</i>Add VM</button>
+                 <!-- Modal add new vm-->
+							<div class="modal fade" id="addVMModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLongTitle">Add new VM</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
+													  <input type="text" class="form-control" placeholder="Search...">
+													  <div class="input-group-append">
+															<button class="btn boton-buscar" type="button">
+															 <i class="material-icons">search</i>
+															</button>
+													  </div>
+										</div>
+											<div class="row justify-content-center">
+											<form class="">
+												<div class="form-group row">
+													<div>
+													
+													  <ul class="list-group">
+                              <li class="list-group-item list-modal" data-nodeid="0">
+                                <input type="checkbox" >                     
+                                <span>VM1 </span>	  
+                              </li>
+                              
+                              <li class="list-group-item list-modal" data-nodeid="4">
+                                <input type="checkbox" >
+                                <span>VM2</span>
+                              </li>
+                              <li class="list-group-item list-modal" data-nodeid="4">
+                                <input type="checkbox" >
+                                <span>Ubuntu</span>
+                                
+                              </li>
+                              <li class="list-group-item list-modal" data-nodeid="5">
+                                <input type="checkbox" >
+                                <span >Windows</span>
+                                
+                              </li>
+																				  
+													  </ul>
+													</div>      
+												</div>
+											</form>	
+											</div>
+											<div class="d-flex flex-row justify-content-center mt-2">
+												<button type="button" class="btn boton-grupos mx-2 col-3">Save</button>
+												<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+              
+              <!-- fin del Modal -->
+              
+              
+              <button class="btn boton-icono boton-grupos mt-2" data-toggle="modal" data-target="#addGroupModal"><i class="material-icons">add_circle</i>Add Group</button>
+              <!-- Modal add new group-->
+							<div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLongTitle">Add new group</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
+													  <input type="text" class="form-control" placeholder="Search...">
+													  <div class="input-group-append">
+															<button class="btn boton-buscar" type="button">
+															 <i class="material-icons">search</i>
+															</button>
+													  </div>
+										</div>
+											<div class="row justify-content-center">
+											<form class="">
+												<div class="form-group row">
+													<div>
+													
+													  <ul class="list-group">
+																			
+														<li class="list-group-item list-modal" data-nodeid="4">
+															<input type="checkbox" >
+														  <span>Group2</span>
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="4">
+															<input type="checkbox" >
+														  <span>Group3</span>
+														  
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="5">
+															<input type="checkbox" >
+														  <span >Group4</span>
+														  
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="6">
+															<input type="checkbox" >
+														  <span >Group5</span>             
+														  
+														</li>
+													  
+													  </ul>
+													</div>      
+												</div>
+											</form>	
+											</div>
+											<div class="d-flex flex-row justify-content-center mt-2">
+												<button type="button" class="btn boton-grupos mx-2 col-3">Save</button>
+												<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+              </div>
+              <!-- fin del Modal -->
+
+              <button class="btn boton-icono boton-grupos mt-2"data-toggle="modal" data-target="#newGroupModal"><i class="material-icons">add_circle</i>New Group</button>
+
+
+               <!-- Modal add new group-->
+							<div class="modal fade" id="newGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLongTitle">Create new group</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
+													  <input type="text" class="form-control" placeholder="Search...">
+													  <div class="input-group-append">
+															<button class="btn boton-buscar" type="button">
+															 <i class="material-icons">search</i>
+															</button>
+													  </div>
+                    </div>
+                    
+
+											<div class="row justify-content-center">
+											<form class="">
+
+                       
+                          <div class="form-group row ">
+                              <label  class=" col-form-label" >Name</label>
+                              <div class="col-9">
+                                <input type="text" class=" form__email">
+                              </div>
+                          </div>
+                        <div class="row ">
+                            <label  class=" col-form-label col-12" >VM's and Groups:</label>
+                           
+                          
+                        </div>
+												<div class="form-group row ">
+                          
+
+
+
+                          
+
+
+
+													<div class="col-12"> 
+                            
+                                                        
+													  <ul class="list-group ">
+                                <li class="list-group-item list-modal " data-nodeid="0">
+                                    <input type="checkbox" >                     
+                                    <span>VM1 </span>	 
+                                   
+                                  </li>
+                                   
+                                  <li class="list-group-item list-modal" data-nodeid="4">
+                                      <input type="checkbox" >
+                                      <span>VM2</span>
+                                    </li>
+                                  
+                                 
+                                  <li class="list-group-item list-modal" data-nodeid="4">
+                                    <input type="checkbox" >
+                                    <span>Ubuntu</span>
+                                    
+                                  </li>
+                                  <li class="list-group-item list-modal" data-nodeid="5">
+                                    <input type="checkbox" >
+                                    <span >Windows</span>
+                                    
+                                  </li>
+                                  <li class="list-group-item list-modal" data-nodeid="4">
+                                      <input type="checkbox" >
+                                      <span>Group1</span>
+                                    </li>
+                                        
+                                  <li class="list-group-item list-modal " data-nodeid="4">
+                                    <input type="checkbox" >
+                                    <span>Group2</span>
+                                  </li>
+                                  <li class="list-group-item list-modal" data-nodeid="4">
+                                    <input type="checkbox" >
+                                    <span>Group3</span>
+                                    
+                                  </li>
+                                  <li class="list-group-item list-modal" data-nodeid="5">
+                                    <input type="checkbox" >
+                                    <span >Group4</span>
+                                    
+                                  </li>
+                                  <li class="list-group-item list-modal" data-nodeid="6">
+                                    <input type="checkbox" >
+                                    <span >Group5</span>             
+                                    
+                                  </li>
+													  </ul>
+                          </div>   
+                         
+                          
+												</div>
+											</form>	
+											</div>
+											<div class="d-flex flex-row justify-content-center mt-2">
+												<button type="button" class="btn boton-grupos mx-2 col-3">Save</button>
+												<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+              </div>
+              <!-- fin del modal --> 
+
+              <button class=" btn boton-icono btn-danger mt-2" data-toggle="modal" data-target="#deleteGroup"><i class="material-icons">delete_outline</i>Delete Group</button>
+
+              <!-- Modal delete  -->
+                  <div class="modal fade" id="deleteGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Delete Group</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                           <p>Are you sure you want to delete it?</p>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn boton-grupos mx-2 col-3">Delete</button>
+                              <button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--fin del modal -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-1 "></div>
+      
+    </div>
+    
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/pruebaGrupos.js"></script>
+  </body>
+</html>

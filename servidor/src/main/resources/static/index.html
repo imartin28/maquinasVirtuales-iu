@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+
+    <title>PI</title>
+  </head>
+  <body>
+    <!-- PRACTICA 6: tu contenido aqui -->
+    
+    <div class="row">
+      <div class="col-1 "></div>    
+      <div class="col-9 container mt-5">
+          <div class="header" >
+            <img src="img/logo.jpg" class="imagen-logo mt-3 ml-5 "> 
+           
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item">
+                  <a class="nav-link active" href="">VM</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="grupos.html">Groups</a>
+                </li>
+               
+              </ul>
+        </div>
+        <div class="row">
+          <div class="col-6 panel-izq">
+              <div class="input-group search-bar ">
+                  <input type="text" class="form-control" id="buscador" placeholder="Search...">
+                  <div class="input-group-append">
+                    <button class="btn boton-buscar " id="botonBuscar" type="button"><i class="material-icons">search</i>
+										</button>
+                  </div>
+              </div>
+			  <div class="panel-estados ml-4 mb-4 mt-4 ">
+                  <button class="btn boton-icono boton-encender mt-2 mr-3" id="play"><i class="material-icons">play_arrow</i>Play</button>
+                  <button class="btn boton-icono boton-reiniciar mt-2 mr-3" id="restart"><i class="material-icons">replay</i>Restart</button>
+                  <button class="btn boton-icono boton-suspender mt-2 mr-3" id="suspend"><i class="material-icons">pause</i>Suspend</button>
+                  <button class="btn boton-icono boton-apagar mt-2 mr-3" id="stop"><i class="material-icons">stop</i>Stop</button>
+              </div> 
+				
+				<div class="col-12">
+				  <h2>VM's</h2>
+				  <div class="row">
+						<ul class="list-group col-6 align-items-left" id="listaVM">
+						  <!--<li class="list-group-item list-vms" data-nodeid="1">
+									<input type="checkbox">
+									<span class="">VM 1</span>
+									<span class="badge badge-success mt-1"> </span>
+							</li>
+							<li class="list-group-item list-vms" data-nodeid="2">
+									<input type="checkbox" >
+									<span class="">VM 2</span>
+									<span class="badge badge-warning mt-1"> </span>
+							</li>
+							<li class="list-group-item list-vms" data-nodeid="3">
+									<input type="checkbox" >
+									<span class="">Ubuntu</span>
+									<span class="badge badge-danger mt-1"> </span>
+						  </li>
+							<li class="list-group-item list-vms" data-nodeid="4">
+									<input type="checkbox" >
+									<span class="">Windows</span>
+									<span class="badge badge-danger mt-1"> </span>
+						  </li> -->
+						 
+						</ul>
+						<div class="col-6 panel-botones-vm">
+							<button type="button" id="botonModificar" class="btn boton-grupos boton-icono mb-3 ml-5 "> <i class="material-icons align-middle">edit</i>Modify MV</button>
+							<button type="button" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#addGroupModal">
+								<i class="material-icons align-middle">add_circle</i>Add Group
+							</button>
+
+							<!-- Modal add new group-->
+							<div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLongTitle">Add new group</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
+													  <input type="text" class="form-control" placeholder="Search...">
+													  <div class="input-group-append">
+															<button class="btn boton-buscar" type="button">
+															 <i class="material-icons">search</i>
+															</button>
+													  </div>
+										</div>
+											<div class="row justify-content-center">
+											<form class="">
+												<div class="form-group row">
+													<div>
+													
+													  <ul id="listaGruposVM" class="list-group">
+														<li class="list-group-item list-modal" data-nodeid="0">
+														  <input type="checkbox" >                     
+														  <span>Group1 </span>	  
+														</li>
+														
+														<li class="list-group-item list-modal" data-nodeid="4">
+															<input type="checkbox" >
+														  <span>Group2</span>
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="4">
+															<input type="checkbox" >
+														  <span>Group3</span>
+														  
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="5">
+															<input type="checkbox" >
+														  <span >Group4</span>
+														  
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="6">
+															<input type="checkbox" >
+														  <span >Group5</span>             
+														  
+														</li>
+													  
+													  </ul>
+													</div>      
+												</div>
+											</form>	
+											</div>
+											<div class="d-flex flex-row justify-content-center mt-2">
+												<button type="button" class="btn boton-grupos mx-2 col-3">Save</button>
+												<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- fin del Modal -->
+							<button type="button" id="btnExport" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#ExportModal">
+								<i class="material-icons align-middle">format_indent_decrease</i>Export
+							</button>
+							
+							
+							<!-- Modal export -->
+							<div class="modal fade" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLongTitle">Export</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
+													  <input type="text" class="form-control" placeholder="Search...">
+													  <div class="input-group-append">
+															<button class="btn boton-buscar">
+																<i class="material-icons">search</i>
+															</button>
+													  </div>
+										</div>
+											<div class="row justify-content-center">
+											<form class="">
+												<div class="form-group row">
+													<div>
+													
+													  <ul id="listaVMModal" class="list-group">
+														<li class="list-group-item list-modal" data-nodeid="8">
+														  <input type="checkbox" >                     
+														  <span>VM1 </span>	  
+														</li>
+														
+														<li class="list-group-item list-modal" data-nodeid="9">
+															<input type="checkbox" >
+														  <span>VM2</span>
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="10">
+															<input type="checkbox" >
+														  <span>Ubuntu</span>
+														  
+														</li>
+														<li class="list-group-item list-modal" data-nodeid="11">
+															<input type="checkbox" >
+														  <span >Windows</span>
+														  
+														</li>
+														
+													  </ul>
+													</div>      
+												</div>
+											</form>	
+											</div>
+											<div class="d-flex flex-row justify-content-center mt-2">
+												<button type="button" class="btn boton-grupos mx-2 col-3">Export</button>
+												<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- fin del Modal -->
+							<button type="button" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#ImportModal">
+								<i class="material-icons align-middle">format_indent_decrease</i>Import
+							</button>
+							
+							
+							<!-- Modal import-->
+							<div class="modal fade" id="ImportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">	
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Import</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body col-9 ml-5 mt-3">
+												<input type="file" class="custom-file-input">
+												<label class="custom-file-label" for="customFile">Choose file</label>
+											</div>
+											<div class="d-flex flex-row justify-content-center  mb-3">
+												<button type="button" class="btn boton-grupos mx-2 col-3">Import</button>
+												<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+
+										
+									</div>
+									
+								</div>
+
+							
+								<!-- fin del Modal -->
+						
+							<button type="button"  class="btn btn-danger boton-icono mb-3 ml-5 droppable" data-toggle="modal" data-target="#deleteVM"><i class="material-icons align-middle">delete_outline</i>Delete VM</button>
+
+							<!-- Modal delete  -->
+							<div class="modal fade" id="deleteVM" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Delete VM</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+											 <p>Are you sure you want to delete it?</p>
+											</div>
+											<div class="modal-footer">
+													<button type="button" class="btn boton-grupos mx-2 col-3">Delete</button>
+													<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--fin del modal -->
+						</div>
+				  </div>
+				</div>
+				
+				
+				
+          </div>
+          <div class="col-5 panel-derecho ml-4">
+            <div>
+              <form>
+                <div class="form-group row ">
+                  <label  class="col-3 col-form-label">Name</label>
+                  <div class="col-9">
+                    <input type="text" class="col-12 form__email" id="nameVM" />
+                  </div>
+				  
+                </div>
+                
+                <div class="form-group row">
+                  <label class="col-3">RAM</label>
+				 			 <div class="col-6">
+                  <input type="range" class="col-12 custom-range" id="formControlRange" >
+                  </div>
+				  <div class="col-3 row d-flex flex-row align-items-center flex-nowrap">
+						
+							<input type="number" class="col-12 form-control" id="inputRAM">
+							<span class="col-1">MB</span>
+							
+						
+						
+					  
+				 </div>
+				 
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3">HDD</label>
+                    <div class="col-6">                     
+                        <input type="range" class="col-12 custom-range" id="storageRange">
+                    </div>
+					<div class="col-3 row d-flex flex-row align-items-center flex-nowrap">
+						<input type="number" class="col-12 form-control" id="inputHDD">
+						<span class="col-1">GB</span>
+						
+					  
+				 </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3">Max CPU</label>
+                    <div class="col-6">                     
+                        <input type="range" class="col-12 custom-range" id="rangeCPU">
+                    </div>
+					<div class="col-3 row d-flex flex-row align-items-center flex-nowrap">
+						<input type="number" class="col-12 form-control" id="inputCPUNumber">
+						<span class="col-1">%</span>
+					  
+				 </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3">Cores</label>
+                    <div class="col-6">                     
+                        <input type="range" class="col-12 custom-range" id="rangeCores">
+                    </div>
+					<div class="col-3 row d-flex flex-row align-items-center flex-nowrap">
+						<input type="number" class="col-12 form-control" id="inputCoresNumber">
+						<span class="col-1">Uts</span>
+					  
+					</div>
+                </div>
+
+                <div class="form-group row">
+                  <label  class="col-3 col-form-label">IP</label>
+                  <div class="col-9">
+                    <input type="email" id="inputIP" class="col-12 form__email"  />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <label  class="col-3 col-form-label">ISO</label>
+                    <div class="col-9">
+											<input type="file" class="custom-file-input" id="isoVM">
+											<label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+			
+					
+					<div class="panel-derecho-botones mt-5 ml-4 d-flex flex-row justify-content-center">
+						<div id="panelDerechoBotones" class="row">
+					  <button type="button" id="botonCrear" class="btn boton-grupos w-auto px-4 mx-2 col-auto">Create</button>
+						<button type="button" class="btn boton-cancelar w-auto px-4 mx-2 col-auto">Cancel</button>
+					</div>
+					</div>
+					
+	
+                
+
+
+              </form>
+           </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-1 "></div>
+      
+    </div>
+    
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+	
+	<script src="js/jquery.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/pruebaVMS.js"></script>
+	<script src="js/parsley.min.js"></script>
+  </body>
+</html>
