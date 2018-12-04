@@ -92,10 +92,9 @@ const Action = {
         // some methods will allow blank (=undefined) fields
         return;
       }
-      let ok = true; /*&&
-        Number.isInteger(num) &&
+      let ok = true &&
         num >= min &&
-        (max === undefined || num <= max);*/
+        (max === undefined || num <= max);
       if ( ! ok) {
         throw Error(
           "Invalid value " + num + " for " + errName +
@@ -194,7 +193,6 @@ const Action = {
   * @throws {Exception} on error or other failure
   */
   function add(conn, options) {
-    console.log("llego a add");
     return send(conn + '/add', "POST", options);
   }
   
@@ -362,18 +360,16 @@ $(function(){
    * toda la interfaz.
    * @param {Object} result 
    */
-  function update(result) {
+  function update(result, ulId) {
       console.log("llego a update")
     handleResult(result, 
       r => {
         state = r; 
         console.log("New state: ", state); 
         try {
-          $("#grupos").empty();
-          state.groups.forEach(group =>  $("#grupos").append(createGroupItem(group)));
-          $("#maquinas").empty();
+          $(ulId).empty();
           for(let i = 0; i < state.vms.length; i++) {
-          $("#listaVM").append(crearLista(state.vms[i].name, state.vms[i].status,i));
+          $(ulId).append(crearLista(state.vms[i].name, state.vms[i].status,i));
           }
         } catch (e) {
           console.log(e);
@@ -430,6 +426,8 @@ $(function(){
         //loadVmData("#listaVM");
         //loadGruposData("#listaGruposVM");
         handleDrop();
+        list(url).then(r => update(r, "#listaVM"));
+        list(url).then(r => update(r, "#listaVMModal"));
         
         //let url = apiServer + "404250";
         console.log(url);
@@ -438,7 +436,7 @@ $(function(){
         $("#restart").click(onClickRestartButton);
         $("#suspend").click(onClickSuspendButton);
         $("#stop").click(onClickStopButton);
-       // $("#btnExport").click(loadVmData("#listaVMModal"));
+        //$("#btnExport").click(loadVmData("#listaVMModal"));
         $("#botonBuscar").click(onClickSearchButton);
         $("#botonModificar").click(onClickModifyButton);
 
@@ -449,8 +447,9 @@ $(function(){
         handleRangeChange('#rangeCPU', '#inputCPUNumber', 100, 40);
         handleRangeChange('#rangeCores', '#inputCoresNumber', navigator.hardwareConcurrency, 1);
 
-        $(".list-vms").change(function(){
+        $("input#chk").on("change", function(){
             let index = $(this).attr("index");
+            console.log(state.vms[0].name);
             let vm = data.vms[index];
             console.log($("#listaVM > li > .checked").length)
 
@@ -505,7 +504,8 @@ $(function(){
 
     function loadVmData(ulId) {
         $(ulId).empty();
-        for(let i = 0; i < data.vms.length; i++) {
+        console.log(ulId);
+        for(let i = 0; i < state.vms.length; i++) {
             let vm = data.vms[i];
             $(ulId).append(crearLista(vm.name, vm.status, i));
         }
@@ -518,17 +518,17 @@ $(function(){
             $(ulId).append(crearListaGrupos(data.groups[i].name, i));
         }
     };
-
+    
     function crearLista(name, status, index) {
         console.log("llego a crearlista")
         if (status == "running") {
-            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
+            return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
         } 
         else if (status == "suspended"){
-            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
+            return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
         }
         else{
-            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
+            return "<li class='list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk'></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
         }
     
     }
@@ -666,37 +666,6 @@ $(function(){
         });
     }
 
-/*constructor(name, ram, hdd, cpu, cores, ip, iso, action) {
-    this.name = name;
-    this.ram = Params.checkRange(ram, 1024, 1024*64, "ram");
-    this.hdd = Params.checkRange(hdd, 1024, undefined, "hdd");
-    this.cpu = Params.checkRange(cpu, 0, 100, "cpu");
-    this.cores = Params.checkRange(cpu, 1, undefined, "cores");
-    this.ip = Params.checkIp(ip);
-    this.iso = iso;
-    this.action = action;
-    this.status = Action.STOP;
-  }
- */
-/*
-$("#addvm_button").click(e => {     
-    if ( ! $("#addForm").parsley().isValid()) {
-      return;
-    }
-	  const name = $("#addName").val();
-    const sampleParams = new Vt.Params(
-      name,
-      1024*16, 1024*1024*16, 100, 2,
-      '172.26.0.1'
-    );
-    Vt.add(url, sampleParams).then(r => update(r))
-    $("#addForm").parsley().reset();
-    return false; // <-- evita que se envie el formulario y recargue la pagina
-  });
-
-
-*/
-
     $("#botonCrear").click(e => {     
     	 
         const name = $("#nameVM").val();
@@ -712,6 +681,8 @@ $("#addvm_button").click(e => {
         );
        
         add(url, sampleParams).then(r => update(r))
+        list(url).then(r => update(r, "#listaVM"));
+        list(url).then(r => update(r, "#listaVMModal"));
         
         return false; // <-- evita que se envie el formulario y recargue la pagina
       });
