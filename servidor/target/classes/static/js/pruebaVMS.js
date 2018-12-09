@@ -361,7 +361,7 @@ $(function(){
    * @param {Object} result 
    */
   function update(result, ulId) {
-      console.log("llego a update")
+      
     handleResult(result, 
       r => {
         state = r; 
@@ -369,6 +369,7 @@ $(function(){
         try {
           $(ulId).empty();
           for(let i = 0; i < state.vms.length; i++) {
+        	  console.log(state.vms[i].status);
           $(ulId).append(crearLista(state.vms[i].name, state.vms[i].status,i));
           }
         } catch (e) {
@@ -450,7 +451,8 @@ $(function(){
         $("input#chk").on("change", function(){
             let index = $(this).attr("index");
             console.log(state.vms[0].name);
-            let vm = data.vms[index];
+            let vm = state.vms[index];
+            console.log(vm);
             console.log($("#listaVM > li > .checked").length)
 
             
@@ -520,15 +522,15 @@ $(function(){
     };
     
     function crearLista(name, status, index) {
-        console.log("llego a crearlista")
-        if (status == "running") {
-            return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
+       
+        if (status == "start" || status == "reset") {
+            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
         } 
-        else if (status == "suspended"){
-            return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
+        else if (status == "suspend"){
+            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
         }
         else{
-            return "<li class='list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk'></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
+            return "<li class='list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk'></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
         }
     
     }
@@ -545,10 +547,14 @@ $(function(){
     
         for(let elem of listaChecks) {
             if($(elem).get()[0].checked) {
-                let state = $(elem).parent().find(".badge");
-                state.removeClass("badge-warning");
-                state.removeClass("badge-danger");
-                state.addClass("badge-success");
+            	let indexVm = $(elem).parent().attr("index");
+            	state.vms[indexVm].state = 'start';
+                let status = $(elem).parent().find(".badge");
+                status.removeClass("badge-warning");
+                status.removeClass("badge-danger");
+                status.addClass("badge-success");
+                list(url).then(r => update(r, "#listaVM"));
+                list(url).then(r => update(r, "#listaVMModal"));
             }
         }
     }
@@ -558,13 +564,15 @@ $(function(){
     
         for(let elem of listaChecks) {
             if($(elem).get()[0].checked) {
-                let state = $(elem).parent().find(".badge");
-                state.removeClass("badge-warning");
-                state.removeClass("badge-danger");
-                state.addClass("badge-danger");
+            	let indexVm = $(elem).parent().attr("index");
+            	state.vms[indexVm].state = 'reset';
+                let status = $(elem).parent().find(".badge");
+                status.removeClass("badge-warning");
+                status.removeClass("badge-danger");
+                status.addClass("badge-danger");
                 setTimeout(function() { 
-                    state.removeClass("badge-danger");
-                    state.addClass("badge-success");
+                    status.removeClass("badge-danger");
+                    status.addClass("badge-success");
                 }, 2000);
                 
             }
@@ -576,10 +584,13 @@ $(function(){
     
         for(let elem of listaChecks) {
             if($(elem).get()[0].checked) {
-                let state = $(elem).parent().find(".badge");
-                state.removeClass("badge-success");
-                state.removeClass("badge-danger");
-                state.addClass("badge-warning");
+            	let indexVm = $(elem).parent().attr("index");
+            	state.vms[indexVm].state = 'suspend';
+                let status = $(elem).parent().find(".badge");
+                status.removeClass("badge-success");
+                status.removeClass("badge-danger");
+                status.addClass("badge-warning");
+               
             }
         }
     }
@@ -589,10 +600,12 @@ $(function(){
         
         for(let elem of listaChecks) {
             if($(elem).get()[0].checked) {
-                let state = $(elem).parent().find(".badge");
-                state.removeClass("badge-success");
-                state.removeClass("badge-danger");
-                state.addClass("badge-danger");
+            	let indexVm = $(elem).parent().attr("index");
+            	state.vms[indexVm].state = 'stop';
+                let status = $(elem).parent().find(".badge");
+                status.removeClass("badge-success");
+                status.removeClass("badge-danger");
+                status.addClass("badge-danger");
             }
         }
     }
@@ -654,13 +667,12 @@ $(function(){
     function handleDrop() {
         $(".draggableVm").draggable({
             tolerance: "touch"
-        });
+        }).disableSelection();
     
         $(".droppable").droppable({
             drop: function(event, ui) {
                 let index = $(ui.draggable).attr('index');
                 data.vms.splice(index, 1);
-                console.log(data);
                 $(ui.draggable).remove();
             }
         });
@@ -684,7 +696,7 @@ $(function(){
         list(url).then(r => update(r, "#listaVM"));
         list(url).then(r => update(r, "#listaVMModal"));
         
-        return false; // <-- evita que se envie el formulario y recargue la pagina
+        //return false; // <-- evita que se envie el formulario y recargue la pagina
       });
 
 });

@@ -361,7 +361,7 @@ $(function(){
    * @param {Object} result 
    */
   function updateVm(result, ulId) {
-    console.log("llego a updateVm")
+    
   handleResult(result, 
     r => {
       state = r; 
@@ -379,7 +379,7 @@ $(function(){
 }
 
 function updateGroupModal(result, ulId) {
-    console.log("llego a updateVm")
+    
   handleResult(result, 
     r => {
       state = r; 
@@ -395,9 +395,30 @@ function updateGroupModal(result, ulId) {
     },
     m => console.log("BUAAAAA - ", m))
 }
+function updateVmModal(result, ulId) {
+    
+  handleResult(result, 
+    r => {
+      state = r; 
+      console.log("New state: ", state); 
+      try {
+        $(ulId).empty();
+        for(let i = 0; i < state.vms.length; i++) {
+          $(ulId).append(crearListaVm(state.vms[i].name, state.vms[i].status,i));
+          }
+        for(let i = 0; i < state.groups.length; i++) {
+           
+          $(ulId).append(crearListaGroups(state.groups[i].name, i));
+          }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    m => console.log("BUAAAAA - ", m))
+}
 
 function crearListaVm(name, status, index) {
-    console.log("llego a crearlista")
+   
     if (status == "running") {
         return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
     } 
@@ -411,15 +432,13 @@ function crearListaVm(name, status, index) {
 }
 
 function crearListaGroups(name, index) {
-    console.log("llego a crearlista")
-    
     return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "</li>";
    
 
 }
 
   function update(result, ulId) {
-      console.log("llego a update")
+      
     handleResult(result, 
       r => {
         state = r; 
@@ -458,7 +477,7 @@ function crearListaGroups(name, index) {
     }
 */
   function updateGroup(result) {
-    console.log("llego a update")
+    
   handleResult(result, 
     r => {
       state = r; 
@@ -473,14 +492,12 @@ function crearListaGroups(name, index) {
             $("#acordeonC").append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
                   
             $("#ui-id-"+cont).append("<ul id=ul"+i+">");
-             console.log("darki perfecto");
             
-     
-             for(let j = 0; j < state.groups[i].members.length; j++){    
+             /*for(let j = 0; j < state.groups[i].members.length; j++){    
                 // console.log(data.groups[i].members[j]);                  
                  $("#ul"+i).append(crearListaMiembros(state.groups[i].members[j]));
                  //console.log(data.groups[1].members);
-             } 
+             } */
              $("#ui-id-"+cont).append("</ul>");
              $("#acordeonC").append("</div>");
          }
@@ -543,6 +560,7 @@ function init(){
     list(url).then(r => updateGroup(r));
     list(url).then(r => updateVm(r, "#listaVMModal"));
     list(url).then(r => updateGroupModal(r, "#addNewGroup"));
+    list(url).then(r => updateVmModal(r, "#listaGruposM"));
     
 
 }
@@ -550,8 +568,7 @@ function init(){
 init();
 
 function crearLista(elem, i){
-    console.log("elem vale:")
-    console.log(elem);
+    
    return  "<h3 id='lista"+i+"' class='badge badge-danger ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-sortable-handle' role='tab' aria-selected='true' aria-expanded='true' tabindex='0'><span class='ui-accordion-header-icon ui-icon ui-icon-triangle-1-s'></span>"+elem+ "</h3>"
     
 }
@@ -560,8 +577,6 @@ function crearListaMiembros(members){
     
     let html = [];
     //html.push( " <ul class='list-group-item'> " + name_group + "</ul>");
-    console.log(members);
-    console.log("pablo cara de culo");
   // for(let i = 0; i < members.length; i++){ 
         
     return "<li class='list-group-item'><input type='checkbox'>" + members +  "</li>";
@@ -580,8 +595,7 @@ function loadGroup(){
        $("#acordeonC").append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
              
        $("#ui-id-"+cont).append("<ul id=ul"+i+">");
-        console.log("darki perfecto");
-        console.log(data.groups[i].name);
+        
 
         for(let j = 0; j < data.groups[i].members.length; j++){    
            // console.log(data.groups[i].members[j]);                  
@@ -594,7 +608,16 @@ function loadGroup(){
 
 };
 
-
+$("#botonAddGroup").click(e => {  
+	
+	const name = $("#nombreGrupoM").val();
+	link(url, [], name).then(r => updateGroup(r))
+	list(url).then(r => updateVmModal(r, "#listaGruposM"));
+	list(url).then(r => updateGroupModal(r, "#addNewGroup"));
+   
+	
+	
+});
 
 $(".accordionUI")
     .accordion({
