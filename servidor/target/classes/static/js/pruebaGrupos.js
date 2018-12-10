@@ -611,9 +611,8 @@ function loadGroup(){
 $("#botonAddGroup").click(e => {  
 	
 	const name = $("#nombreGrupoM").val();
-	link(url, [], name).then(r => updateGroup(r))
-	list(url).then(r => updateVmModal(r, "#listaGruposM"));
-	list(url).then(r => updateGroupModal(r, "#addNewGroup"));
+	$("#acordeonC").empty();
+	link(url, [], name).then(r => updateGroup(r)).then(r => updateVmModal(r, "#listaGruposM")).then(r => updateGroupModal(r, "#addNewGroup"));
    
 	
 	
