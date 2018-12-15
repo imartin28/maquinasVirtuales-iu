@@ -360,18 +360,25 @@ $(function(){
    * toda la interfaz.
    * @param {Object} result 
    */
-  function update(result, ulId) {
+  function update(result, ids) {
       
     handleResult(result, 
       r => {
         state = r; 
         console.log("New state: ", state); 
         try {
-          $(ulId).empty();
-          for(let i = 0; i < state.vms.length; i++) {
-        	  console.log(state.vms[i].status);
-          $(ulId).append(crearLista(state.vms[i].name, state.vms[i].status,i));
+          for (const id of ids) {
+        	  console.log("processing id " + id);
+	          $(id).empty();
+	          for(let i = 0; i < state.vms.length; i++) {
+	        	  console.log(state.vms[i].status);
+	        	  let o = $(crearLista(state.vms[i].name, state.vms[i].status,i));
+	        	  $(id).append(o);
+	          }
           }
+    	  $(".draggableVm").draggable({
+              tolerance: "touch"
+          }).disableSelection();
         } catch (e) {
           console.log(e);
         }
@@ -426,10 +433,9 @@ $(function(){
     function init() {
         //loadVmData("#listaVM");
         //loadGruposData("#listaGruposVM");
+        list(url).then(r => update(r, ["#listaVM", "#listaVMModal"]));
         handleDrop();
-        list(url).then(r => update(r, "#listaVM"));
-        list(url).then(r => update(r, "#listaVMModal"));
-        
+
         //let url = apiServer + "404250";
         console.log(url);
         //handle buttons
@@ -553,8 +559,7 @@ $(function(){
                 status.removeClass("badge-warning");
                 status.removeClass("badge-danger");
                 status.addClass("badge-success");
-                list(url).then(r => update(r, "#listaVM"));
-                list(url).then(r => update(r, "#listaVMModal"));
+                list(url).then(r => update(r, ["#listaVM", "#listaVMModal"]));
             }
         }
     }
@@ -665,9 +670,6 @@ $(function(){
     }
     
     function handleDrop() {
-        $(".draggableVm").draggable({
-            tolerance: "touch"
-        }).disableSelection();
     
         $(".droppable").droppable({
             drop: function(event, ui) {
@@ -692,9 +694,7 @@ $(function(){
 
         );
        
-        add(url, sampleParams).then(r => update(r))
-        list(url).then(r => update(r, "#listaVM"));
-        list(url).then(r => update(r, "#listaVMModal"));
+        add(url, sampleParams).then(r => update(r, ["#listaVM", "#listaVMModal"]));
         
         //return false; // <-- evita que se envie el formulario y recargue la pagina
       });
