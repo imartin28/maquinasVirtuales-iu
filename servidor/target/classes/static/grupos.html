@@ -40,9 +40,10 @@
         <div class="row">
           <div class="col-8 panel-izq">       
               <div class="input-group search-bar mb-3">
-                  <input type="text" class="form-control" placeholder="Search...">
+                  <input type="text" class="form-control" id="buscador" placeholder="Search...">
                   <div class="input-group-append">
-                    <button class="btn boton-buscar" type="button">Search</button>
+                    <button class="btn boton-buscar " id="botonBuscar" type="button"><i class="material-icons">search</i>
+										</button>
                   </div>
               </div>
               
@@ -158,12 +159,11 @@
 										</div>
 										<div class="modal-body">
 										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
-													  <input type="text" class="form-control" placeholder="Search...">
-													  <div class="input-group-append">
-															<button class="btn boton-buscar" type="button">
-															 <i class="material-icons">search</i>
-															</button>
-													  </div>
+													 <input type="text" class="form-control" id="buscadorVm" placeholder="Search...">
+               										<div class="input-group-append">
+                 										<button class="btn boton-buscar " id="botonBuscarVm" type="button"><i class="material-icons">search</i>
+												</button>
+               										</div>
 										</div>
 											<div class="row justify-content-center">
 											<form class="">
@@ -203,12 +203,11 @@
 										</div>
 										<div class="modal-body">
 										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
-													  <input type="text" class="form-control" placeholder="Search...">
-													  <div class="input-group-append">
-															<button class="btn boton-buscar" type="button">
-															 <i class="material-icons">search</i>
+													  <input type="text" class="form-control" id="buscadorGroup" placeholder="Search...">
+                  										<div class="input-group-append">
+                    										<button class="btn boton-buscar " id="botonBuscarGroup" type="button"><i class="material-icons">search</i>
 															</button>
-													  </div>
+                  										</div>
 										</div>
 											<div class="row justify-content-center">
 											<form class="">
@@ -249,13 +248,12 @@
 										</div>
 										<div class="modal-body">
 										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
-													  <input type="text" class="form-control" placeholder="Search...">
-													  <div class="input-group-append">
-															<button class="btn boton-buscar" type="button">
-															 <i class="material-icons">search</i>
-															</button>
-													  </div>
-                    </div>
+										  	<input type="text" class="form-control" id="buscadorGroupVm" placeholder="Search...">
+               										<div class="input-group-append">
+                 										<button class="btn boton-buscar " id="botonBuscarGroupVm" type="button"><i class="material-icons">search</i>
+												</button>
+               										</div>
+                    					</div>
                     
 
 											<div class="row justify-content-center">
@@ -349,7 +347,7 @@
               </div>
               <!-- fin del modal --> 
 
-              <button class=" btn boton-icono btn-danger mt-2" data-toggle="modal" data-target="#deleteGroup"><i class="material-icons">delete_outline</i>Delete Group</button>
+              <button class=" btn boton-icono delete mt-2 droppable" data-toggle="modal tooltip" data-placement="top" title="Arrastra aqui para borrar" data-target="#deleteGroup"><i class="material-icons">delete_outline</i>Delete Group</button>
 
               <!-- Modal delete  -->
                   <div class="modal fade" id="deleteGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -390,5 +388,6 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery-ui.min.js"></script>
   <script type="text/javascript" src="js/pruebaGrupos.js"></script>
+  <script src="js/parsley.min.js"></script>
   </body>
 </html>

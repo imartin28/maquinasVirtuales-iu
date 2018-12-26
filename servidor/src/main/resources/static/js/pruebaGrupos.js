@@ -332,6 +332,12 @@ function sendJson(state, url) {
 
 $(function(){
     console.log("online!");
+    
+    $(document).ready(function(){
+        $(document).tooltip({
+            tooltipClass: "tooltip-styling"
+        });
+    });
 
   // activamos tooltips
   $('[data-toggle="tooltip"]').tooltip()
@@ -501,6 +507,9 @@ function crearListaGroups(name, index) {
              $("#ui-id-"+cont).append("</ul>");
              $("#acordeonC").append("</div>");
          }
+        $(".draggableGroup").draggable({
+            tolerance: "touch"
+        }).disableSelection();
         
       } catch (e) {
         console.log(e);
@@ -561,6 +570,11 @@ function init(){
     list(url).then(r => updateVm(r, "#listaVMModal"));
     list(url).then(r => updateGroupModal(r, "#addNewGroup"));
     list(url).then(r => updateVmModal(r, "#listaGruposM"));
+    $("#botonBuscar").click(onClickSearchButton);
+    $("#botonBuscarGroup").click(onClickSearchButtonGroup);
+    $("#botonBuscarGroupVm").click(onClickSearchButtonGroupVm);
+   
+    handleDrop();
     
 
 }
@@ -569,7 +583,7 @@ init();
 
 function crearLista(elem, i){
     
-   return  "<h3 id='lista"+i+"' class='badge badge-danger ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-sortable-handle' role='tab' aria-selected='true' aria-expanded='true' tabindex='0'><span class='ui-accordion-header-icon ui-icon ui-icon-triangle-1-s'></span>"+elem+ "</h3>"
+   return  "<h3 id='lista"+i+"' class='badge draggableGroup badge-danger ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-sortable-handle' role='tab' aria-selected='true' aria-expanded='true' tabindex='0'><span class='ui-accordion-header-icon ui-icon ui-icon-triangle-1-s'></span>"+elem+ "</h3>"
     
 }
 
@@ -641,6 +655,86 @@ $(".accordionUI")
             $(ui.item).css("color", "red");
         }
     });
+function onClickSearchButton() {
+    
+    let listaChecks = $("#acordeonC > h3");
+    
+    if($("#buscador").val() === "" || $("#buscador").val() === null) {
+        for(let elem of listaChecks) {
+            $(elem).removeClass("d-none");
+        }
+    }
+    else {
+        for(let i = 0; i < listaChecks.length; i++) {
+        	
+            if($(listaChecks[i]).text() !== $("#buscador").val()){
+                $(listaChecks[i]).addClass("d-none");
+            }
+        }
+    }
+}
 
+function onClickSearchButtonVm() {
+    
+    let listaChecks = $("#listaGruposM > li");
+    
+    if($("#buscadorVm").val() === "" || $("#buscadorVm").val() === null) {
+        for(let elem of listaChecks) {
+            $(elem).removeClass("d-none");
+        }
+    }
+    else {
+        for(let i = 0; i < listaChecks.length; i++) {
+            if($(listaChecks[i]).attr("name") !== $("#buscadorVm").val()){
+                $(listaChecks[i]).addClass("d-none");
+            }
+        }
+    }
+}
+
+function onClickSearchButtonGroup() {
+    
+    let listaChecks = $("#addNewGroup > li");
+    
+    if($("#buscadorGroup").val() === "" || $("#buscadorGroup").val() === null) {
+        for(let elem of listaChecks) {
+            $(elem).removeClass("d-none");
+        }
+    }
+    else {
+        for(let i = 0; i < listaChecks.length; i++) {
+            if($(listaChecks[i]).attr("name") !== $("#buscadorGroup").val()){
+                $(listaChecks[i]).addClass("d-none");
+            }
+        }
+    }
+}
+function onClickSearchButtonGroupVm() {
+    
+    let listaChecks = $("#listaGruposM > li");
+    
+    if($("#buscadorGroupVm").val() === "" || $("#buscadorGroupVm").val() === null) {
+        for(let elem of listaChecks) {
+            $(elem).removeClass("d-none");
+        }
+    }
+    else {
+        for(let i = 0; i < listaChecks.length; i++) {
+            if($(listaChecks[i]).attr("name") !== $("#buscadorGroupVm").val()){
+                $(listaChecks[i]).addClass("d-none");
+            }
+        }
+    }
+}
+function handleDrop() {
+    
+    $(".droppable").droppable({
+        drop: function(event, ui) {
+            let index = $(ui.draggable).attr('index');
+            data.vms.splice(index, 1);
+            $(ui.draggable).remove();
+        }
+    });
+}
 
 });

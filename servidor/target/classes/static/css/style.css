@@ -5,12 +5,23 @@
 *{
     font-family: 'K2D';
 }
-
+.tooltip-styling{
+    background:black !important;
+    color: white !important;
+}
 .container{
     box-shadow: 0 0 15px #a4a4a4;
     border-radius: 5px;     
 }
-
+.delete{
+	background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color:red;
+}
 .header{
     background-image: linear-gradient(to right,white, orange, white);
     height: 160px; 
