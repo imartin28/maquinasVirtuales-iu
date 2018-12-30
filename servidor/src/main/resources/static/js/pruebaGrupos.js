@@ -385,7 +385,7 @@ $(function(){
 }
 
 function updateGroupModal(result, ulId) {
-    
+    console.log("RESULT:"+ ulId);
   handleResult(result, 
     r => {
       state = r; 
@@ -460,7 +460,7 @@ function crearListaGroups(name, index) {
           console.log(e);
         }
       },
-      m => console.log("BUAAAAA - ", m))
+     m => console.log("BUAAAAA - ", m))
   }
 /** 
  * for(let i = 0; i < data.groups.length; i++){          
@@ -498,12 +498,12 @@ function crearListaGroups(name, index) {
             $("#acordeonC").append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
                   
             $("#ui-id-"+cont).append("<ul id=ul"+i+">");
-            
-             /*for(let j = 0; j < state.groups[i].members.length; j++){    
-                // console.log(data.groups[i].members[j]);                  
-                 $("#ul"+i).append(crearListaMiembros(state.groups[i].members[j]));
-                 //console.log(data.groups[1].members);
-             } */
+            if(state.groups[i].elements.length > 0) {
+	             for(let j = 0; j < state.groups[i].elements.length; j++){                     
+	                $("#ul"+i).append(crearListaMiembros(state.groups[i].elements[j]));
+	                 //console.log(data.groups[1].members);
+	             } 
+            }
              $("#ui-id-"+cont).append("</ul>");
              $("#acordeonC").append("</div>");
          }
@@ -514,8 +514,8 @@ function crearListaGroups(name, index) {
       } catch (e) {
         console.log(e);
       }
-    },
-    m => console.log("BUAAAAA - ", m))
+    })
+    //m => console.log("BUAAAAA - ", m))
 }
 
 let data = {
@@ -565,15 +565,17 @@ let data = {
 function init(){
     
    // updateGroup();
-   console.log(list(url));
     list(url).then(r => updateGroup(r));
     list(url).then(r => updateVm(r, "#listaVMModal"));
     list(url).then(r => updateGroupModal(r, "#addNewGroup"));
+    list(url).then(r => updateGroupModal(r, "#groupsTolink"));
     list(url).then(r => updateVmModal(r, "#listaGruposM"));
     $("#botonBuscar").click(onClickSearchButton);
     $("#botonBuscarGroup").click(onClickSearchButtonGroup);
     $("#botonBuscarGroupVm").click(onClickSearchButtonGroupVm);
-   
+    $("#botonBuscarVm").click(onClickSearchButtonVm);
+    $("#linkVm").click(onClickLinkVm);
+      
     handleDrop();
     
 
@@ -611,11 +613,11 @@ function loadGroup(){
        $("#ui-id-"+cont).append("<ul id=ul"+i+">");
         
 
-        for(let j = 0; j < data.groups[i].members.length; j++){    
+        //for(let j = 0; j < data.groups[i].members.length; j++){    
            // console.log(data.groups[i].members[j]);                  
-            $("#ul"+i).append(crearListaMiembros(data.groups[i].members[j]));
+            //$("#ul"+i).append(crearListaMiembros(data.groups[i].members[j]));
             //console.log(data.groups[1].members);
-        } 
+      //  } 
         $("#ui-id-"+cont).append("</ul>");
         $("#acordeonC").append("</div>");
     }
@@ -626,7 +628,7 @@ $("#botonAddGroup").click(e => {
 	
 	const name = $("#nombreGrupoM").val();
 	$("#acordeonC").empty();
-	link(url, [], name).then(r => updateGroup(r)).then(r => updateVmModal(r, "#listaGruposM")).then(r => updateGroupModal(r, "#addNewGroup"));
+	link(url, [], name).then(r => updateGroup(r)).then(r => updateVmModal(r, "#listaGruposM")).then(r => updateGroupModal(r, "#groupsTolink"));
    
 	
 	
@@ -676,7 +678,7 @@ function onClickSearchButton() {
 
 function onClickSearchButtonVm() {
     
-    let listaChecks = $("#listaGruposM > li");
+    let listaChecks = $("#listaVMModal > li");
     
     if($("#buscadorVm").val() === "" || $("#buscadorVm").val() === null) {
         for(let elem of listaChecks) {
@@ -725,6 +727,29 @@ function onClickSearchButtonGroupVm() {
             }
         }
     }
+}
+function onClickLinkVm() {
+    
+    let listaChecks = $("#listaVMModal > li > input");
+    let grupo = $("#groupsTolink > li > input");
+    let arrayVm = [];
+    let nombreGrupo = "";
+    for(let elem of listaChecks) {
+        if($(elem).get()[0].checked) {
+        	let nameVm = $(elem).parent().attr("name");
+        	arrayVm.push(nameVm);
+        	
+        }
+    }
+    for(let elem of grupo) {
+        if($(elem).get()[0].checked) {
+        	let nombreGrupo = $(elem).parent().attr("name");
+        	link(url, arrayVm, nombreGrupo);
+        	
+        }
+    }
+    
+    list(url).then(r => updateGroup(r));
 }
 function handleDrop() {
     
