@@ -375,7 +375,7 @@ $(function(){
       try {
         $(ulId).empty();
         for(let i = 0; i < state.vms.length; i++) {
-        $(ulId).append(crearListaVm(state.vms[i].name, state.vms[i].status,i));
+        $(ulId).append(crearListaVm(state.vms[i].name,i));
         }
       } catch (e) {
         console.log(e);
@@ -385,7 +385,7 @@ $(function(){
 }
 
 function updateGroupModal(result, ulId) {
-    console.log("RESULT:"+ ulId);
+    console.log("RESULT:"+ result);
   handleResult(result, 
     r => {
       state = r; 
@@ -401,39 +401,19 @@ function updateGroupModal(result, ulId) {
     },
     m => console.log("BUAAAAA - ", m))
 }
-function updateVmModal(result, ulId) {
-    
-  handleResult(result, 
-    r => {
-      state = r; 
-      console.log("New state: ", state); 
-      try {
-        $(ulId).empty();
-        for(let i = 0; i < state.vms.length; i++) {
-          $(ulId).append(crearListaVm(state.vms[i].name, state.vms[i].status,i));
-          }
-        for(let i = 0; i < state.groups.length; i++) {
-           
-          $(ulId).append(crearListaGroups(state.groups[i].name, i));
-          }
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    m => console.log("BUAAAAA - ", m))
-}
 
-function crearListaVm(name, status, index) {
+
+function crearListaVm(name, index) {
    
-    if (status == "running") {
-        return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
-    } 
+    //if (status == "running") {
+        return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "</li>";
+   /* } 
     else if (status == "suspended"){
         return "<li class= 'list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
     }
     else{
         return "<li class='list-group-item list-vms draggableVm ui-draggable ui-draggable-handle' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk'></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
-    }
+    }*/
 
 }
 
@@ -443,74 +423,64 @@ function crearListaGroups(name, index) {
 
 }
 
-  function update(result, ulId) {
-      
-    handleResult(result, 
-      r => {
-        state = r; 
-        console.log("New state: ", state); 
-        try {
-          $("#grupos").empty();
-          state.groups.forEach(group =>  $("#grupos").append(createGroupItem(group)));
-          $(ulId).empty();
-          for(let i = 0; i < state.groups.length; i++) {
-          $(ulId).append(crearLista(state.vms[i].name, state.vms[i].status,i));
-          }
-        } catch (e) {
-          console.log(e);
-        }
-      },
-     m => console.log("BUAAAAA - ", m))
-  }
-/** 
- * for(let i = 0; i < data.groups.length; i++){          
-       // $("#lista").append(crearLista(data.groups[i].name));
-       $("#acordeonC").append(crearLista(data.groups[i].name, i));
-       let cont = i + 1; 
-       $("#acordeonC").append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
-             
-       $("#ui-id-"+cont).append("<ul id=ul"+i+">");
-        console.log("darki perfecto");
-        console.log(data.groups[i].name);
-
-        for(let j = 0; j < data.groups[i].members.length; j++){    
-           // console.log(data.groups[i].members[j]);                  
-            $("#ul"+i).append(crearListaMiembros(data.groups[i].members[j]));
-            //console.log(data.groups[1].members);
-        } 
-        $("#ui-id-"+cont).append("</ul>");
-        $("#acordeonC").append("</div>");
-    }
-*/
+  
   function updateGroup(result) {
     
   handleResult(result, 
     r => {
+    	
       state = r; 
       console.log("New state: ", state); 
       try {
-        $("#listaMiembros").empty();
+    	  $("#groupsTolink").empty();
+    	  $("#acordeonC").empty();
         for(let i = 0; i < state.groups.length; i++){          
             // $("#lista").append(crearLista(data.groups[i].name));
+        	let cont = i + 1;
+        	$("#acordeonC").append("<div class='draggableGroup accordionUI' id=div"+cont+">");
+            $("#div"+cont).append(crearLista(state.groups[i].name, i));
             
-            $("#acordeonC").append(crearLista(state.groups[i].name, i));
-            let cont = i + 1; 
-            $("#acordeonC").append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
-                  
+            $("#div"+cont).append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
+                
             $("#ui-id-"+cont).append("<ul id=ul"+i+">");
+            
+            $("#groupsTolink").append(crearListaGroups(state.groups[i].name, i));
+            
             if(state.groups[i].elements.length > 0) {
 	             for(let j = 0; j < state.groups[i].elements.length; j++){                     
-	                $("#ul"+i).append(crearListaMiembros(state.groups[i].elements[j]));
+	                $("#ul"+i).append(crearListaMiembros(state.groups[i].elements[j], state.groups[i].elements[j].state));
 	                 //console.log(data.groups[1].members);
 	             } 
-            }
+            }$("#div"+cont+">").append("</div>");
              $("#ui-id-"+cont).append("</ul>");
              $("#acordeonC").append("</div>");
          }
         $(".draggableGroup").draggable({
             tolerance: "touch"
         }).disableSelection();
+        $(".accordionUI")
+        .accordion({
+            collapsible: true,
+            heightStyle: "content",
+            header: "> h3",
+        })
+        .sortable({
+            axis:"y",
+            handle: "h3",
+            connectWith: ".accordionUI",
+            placeholder: "ui-state-highlight",
+            stop: function( event, ui ) {
+                // IE doesn't register the blur when sorting
+                // so trigger focusout handlers to remove .ui-state-focus
+                ui.item.children( "h3" ).triggerHandler( "focusout" );
         
+                // Refresh accordion to handle new order
+                $( this ).accordion( "refresh" );
+            },
+            sort: function( event, ui ) {
+                $(ui.item).css("color", "red");
+            }
+        });  
       } catch (e) {
         console.log(e);
       }
@@ -518,58 +488,16 @@ function crearListaGroups(name, index) {
     //m => console.log("BUAAAAA - ", m))
 }
 
-let data = {
-    vms: [
-        {
-            name: "Linux1",
-            ram: 2048,
-            hdd: 20480,
-            status: "running",
-            cpu: 100,
-            cores: 1
-        },
-        {
-            name: "Linux2",
-            ram: 2048,
-            hdd: 20480,
-            status: "running",
-            cpu: 100,
-            cores: 1
-        },
-        {
-            name: "Linux3",
-            ram: 2048,
-            hdd: 20480,
-            status: "running",
-            cpu: 100,
-            cores: 1
-        },
-    ],
-    groups: [
-        {
-            name: 'Linuxen', 
-            members: ['Linux1', 'Linux2', 'Linux3'],
-           
-            
-        },
-        {
-            name: 'Linuxenssss', 
-            members: ['Linusssssx1', 'Linssssux2', 'Linussssx3'],
-            
-            
-        },
-    ]
-}
+
 
 
 function init(){
     
-   // updateGroup();
+   
     list(url).then(r => updateGroup(r));
     list(url).then(r => updateVm(r, "#listaVMModal"));
-    list(url).then(r => updateGroupModal(r, "#addNewGroup"));
-    list(url).then(r => updateGroupModal(r, "#groupsTolink"));
-    list(url).then(r => updateVmModal(r, "#listaGruposM"));
+    
+    
     $("#botonBuscar").click(onClickSearchButton);
     $("#botonBuscarGroup").click(onClickSearchButtonGroup);
     $("#botonBuscarGroupVm").click(onClickSearchButtonGroupVm);
@@ -585,78 +513,36 @@ init();
 
 function crearLista(elem, i){
     
-   return  "<h3 id='lista"+i+"' class='badge draggableGroup badge-danger ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-sortable-handle' role='tab' aria-selected='true' aria-expanded='true' tabindex='0'><span class='ui-accordion-header-icon ui-icon ui-icon-triangle-1-s'></span>"+elem+ "</h3>"
+   return  "<h3 id='lista"+i+"' name="+elem+" class='badge badge-danger ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-sortable-handle' role='tab' aria-selected='true' aria-expanded='true' tabindex='0'><span class='ui-accordion-header-icon ui-icon ui-icon-triangle-1-s'></span>"+elem+ "</h3>"
     
 }
 
-function crearListaMiembros(members){
-    
-    let html = [];
-    //html.push( " <ul class='list-group-item'> " + name_group + "</ul>");
-  // for(let i = 0; i < members.length; i++){ 
-        
-    return "<li class='list-group-item'><input type='checkbox'>" + members +  "</li>";
-  // }
-  
-    //return html;
+function crearListaMiembros(members,status){
+   
+	if (status == "running"){
+		return "<li class='list-group-item list-vms'><input type='checkbox'>" + members +  "<span class='badge badge-success mt-1'>  </span> </li>";
+	}
+	else if (status == "suspended"){
+		return "<li class='list-group-item list-vms'><input type='checkbox'>" + members +  "<span class='badge badge-warning mt-1'>  </span> </li>";
+	}
+	else {
+		return "<li class='list-group-item list-vms'><input type='checkbox'>" + members +  "<span class='badge badge-danger mt-1'>  </span> </li>";
+	}
 }
 
-function loadGroup(){
-    $("#listaMiembros").empty();
-    
-    for(let i = 0; i < data.groups.length; i++){          
-       // $("#lista").append(crearLista(data.groups[i].name));
-       $("#acordeonC").append(crearLista(data.groups[i].name, i));
-       let cont = i + 1; 
-       $("#acordeonC").append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
-             
-       $("#ui-id-"+cont).append("<ul id=ul"+i+">");
-        
 
-        //for(let j = 0; j < data.groups[i].members.length; j++){    
-           // console.log(data.groups[i].members[j]);                  
-            //$("#ul"+i).append(crearListaMiembros(data.groups[i].members[j]));
-            //console.log(data.groups[1].members);
-      //  } 
-        $("#ui-id-"+cont).append("</ul>");
-        $("#acordeonC").append("</div>");
-    }
-
-};
 
 $("#botonAddGroup").click(e => {  
 	
 	const name = $("#nombreGrupoM").val();
 	$("#acordeonC").empty();
-	link(url, [], name).then(r => updateGroup(r)).then(r => updateVmModal(r, "#listaGruposM")).then(r => updateGroupModal(r, "#groupsTolink"));
-   
+	link(url, [], name).then(r => updateGroup(r));
+	
 	
 	
 });
 
-$(".accordionUI")
-    .accordion({
-        collapsible: true,
-        heightStyle: "content",
-        header: "> div > h3",
-    })
-    .sortable({
-        axis:"y",
-        handle: "h3",
-        connectWith: ".accordionUI",
-        placeholder: "ui-state-highlight",
-        stop: function( event, ui ) {
-            // IE doesn't register the blur when sorting
-            // so trigger focusout handlers to remove .ui-state-focus
-            ui.item.children( "h3" ).triggerHandler( "focusout" );
-    
-            // Refresh accordion to handle new order
-            $( this ).accordion( "refresh" );
-        },
-        sort: function( event, ui ) {
-            $(ui.item).css("color", "red");
-        }
-    });
+
 function onClickSearchButton() {
     
     let listaChecks = $("#acordeonC > h3");
@@ -744,22 +630,26 @@ function onClickLinkVm() {
     for(let elem of grupo) {
         if($(elem).get()[0].checked) {
         	let nombreGrupo = $(elem).parent().attr("name");
-        	link(url, arrayVm, nombreGrupo);
+        	link(url, arrayVm, nombreGrupo).then(r => updateGroup(r));
         	
         }
     }
     
-    list(url).then(r => updateGroup(r));
+    
 }
 function handleDrop() {
     
     $(".droppable").droppable({
         drop: function(event, ui) {
-            let index = $(ui.draggable).attr('index');
-            data.vms.splice(index, 1);
+        	const name = $((ui.draggable).contents().get(0)).attr("name");
+        	
+            rm(url,[name]).then(r => updateGroup(r));
+           
             $(ui.draggable).remove();
+            
         }
     });
+    
 }
 
 });
