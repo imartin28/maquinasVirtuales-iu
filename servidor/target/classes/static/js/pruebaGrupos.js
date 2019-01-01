@@ -437,7 +437,7 @@ function crearListaGroups(name, index) {
         for(let i = 0; i < state.groups.length; i++){          
             // $("#lista").append(crearLista(data.groups[i].name));
         	let cont = i + 1;
-        	$("#acordeonC").append("<div class='draggableGroup accordionUI' id=div"+cont+">");
+        	$("#acordeonC").append("<div class='draggableGroup accordionUI' id=div"+cont+" name="+state.groups[i].name+">");
             $("#div"+cont).append(crearLista(state.groups[i].name, i));
             
             $("#div"+cont).append("<div class='ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active' id='ui-id-"+cont+"' aria-labelledby='lista' role='tabpanel' aria-hidden='false' style='display: block;'>");
@@ -451,6 +451,7 @@ function crearListaGroups(name, index) {
 	                $("#ul"+i).append(crearListaMiembros(state.groups[i].elements[j], state.groups[i].elements[j].state));
 	                 //console.log(data.groups[1].members);
 	             } 
+	             $("#ul"+i).append("<input type='checkbox' id="+state.groups[i].name+" name="+state.groups[i].name+" index="+i+">Seleccionar todas las maquinas")
             }$("#div"+cont+">").append("</div>");
              $("#ui-id-"+cont).append("</ul>");
              $("#acordeonC").append("</div>");
@@ -480,12 +481,13 @@ function crearListaGroups(name, index) {
             sort: function( event, ui ) {
                 $(ui.item).css("color", "red");
             }
-        });  
+        });
+        
       } catch (e) {
         console.log(e);
       }
-    })
-    //m => console.log("BUAAAAA - ", m))
+    },
+    m => console.log("BUAAAAA - ", m))
 }
 
 
@@ -499,10 +501,13 @@ function init(){
     
     
     $("#botonBuscar").click(onClickSearchButton);
-    $("#botonBuscarGroup").click(onClickSearchButtonGroup);
-    $("#botonBuscarGroupVm").click(onClickSearchButtonGroupVm);
     $("#botonBuscarVm").click(onClickSearchButtonVm);
     $("#linkVm").click(onClickLinkVm);
+    
+    $("#play").click(onClickPlayButton);
+    $("#restart").click(onClickRestartButton);
+    $("#suspend").click(onClickSuspendButton);
+    $("#stop").click(onClickStopButton);
       
     handleDrop();
     
@@ -537,27 +542,151 @@ $("#botonAddGroup").click(e => {
 	const name = $("#nombreGrupoM").val();
 	$("#acordeonC").empty();
 	link(url, [], name).then(r => updateGroup(r));
-	
-	
+	$("#nombreGrupoM").parsley().reset();
 	
 });
 
+function onClickPlayButton() {
+    let listaChecks = $("#acordeonC > div > div > ul > input");
+    let listaSingleCheck = $("#acordeonC > div > div > ul > li > input");
+    for(let elem of listaChecks) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-warning");
+            status.removeClass("badge-danger");
+            status.addClass("badge-success");
+            //list(url).then(r => update(r, ["#listaVM", "#listaVMModal"]));
+        }
+    }
+    for(let elem of listaSingleCheck) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-warning");
+            status.removeClass("badge-danger");
+            status.addClass("badge-success");
+            //list(url).then(r => update(r, ["#listaVM", "#listaVMModal"]));
+        }
+    }
+}
+
+function onClickRestartButton() {
+	let listaChecks = $("#acordeonC > div > div > ul > input");
+    let listaSingleCheck = $("#acordeonC > div > div > ul > li > input");
+    for(let elem of listaChecks) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-warning");
+            status.removeClass("badge-danger");
+            status.addClass("badge-danger");
+            setTimeout(function() { 
+                status.removeClass("badge-danger");
+                status.addClass("badge-success");
+            }, 2000);
+        }
+    }
+    for(let elem of listaSingleCheck) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-warning");
+            status.removeClass("badge-danger");
+            status.addClass("badge-danger");
+            setTimeout(function() { 
+                status.removeClass("badge-danger");
+                status.addClass("badge-success");
+            }, 2000);
+        }
+    }
+}
+
+function onClickSuspendButton() {
+	let listaChecks = $("#acordeonC > div > div > ul > input");
+    let listaSingleCheck = $("#acordeonC > div > div > ul > li > input");
+    for(let elem of listaChecks) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-success");
+            status.removeClass("badge-danger");
+            status.addClass("badge-warning");
+        }
+    }
+    for(let elem of listaSingleCheck) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-success");
+            status.removeClass("badge-danger");
+            status.addClass("badge-warning");
+        }
+    }
+}
+
+function onClickStopButton() {
+	let listaChecks = $("#acordeonC > div > div > ul > input");
+    let listaSingleCheck = $("#acordeonC > div > div > ul > li > input");
+    for(let elem of listaChecks) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-success");
+            status.removeClass("badge-danger");
+            status.addClass("badge-danger");
+        }
+    }
+    for(let elem of listaSingleCheck) {
+        if($(elem).get()[0].checked) {
+        	//let indexGroup = $(elem).attr("index");
+        	//console.log(indexVm);
+        	//state.vms[indexVm].state = 'start';
+        	
+            let status = $(elem).parent().find(".badge");
+            status.removeClass("badge-success");
+            status.removeClass("badge-danger");
+            status.addClass("badge-danger");
+        }
+    }
+}
 
 function onClickSearchButton() {
     
-    let listaChecks = $("#acordeonC > h3");
-    
+    let listaChecks = $("#acordeonC > div");
+    console.log(listaChecks);
     if($("#buscador").val() === "" || $("#buscador").val() === null) {
+    	
         for(let elem of listaChecks) {
-            $(elem).removeClass("d-none");
+        	$(elem).removeClass("d-none");
         }
     }
     else {
-        for(let i = 0; i < listaChecks.length; i++) {
-        	
-            if($(listaChecks[i]).text() !== $("#buscador").val()){
-                $(listaChecks[i]).addClass("d-none");
-            }
+    	for(let elem of listaChecks) {
+    		if($("#buscador").val() !== $(elem).attr("name")){
+        	$(elem).addClass("d-none");
+    		}
         }
     }
 }
@@ -565,9 +694,13 @@ function onClickSearchButton() {
 function onClickSearchButtonVm() {
     
     let listaChecks = $("#listaVMModal > li");
-    
+    let listaChecksGroups = $("#groupsTolink > li");
+   
     if($("#buscadorVm").val() === "" || $("#buscadorVm").val() === null) {
         for(let elem of listaChecks) {
+            $(elem).removeClass("d-none");
+        }
+        for(let elem of listaChecksGroups) {
             $(elem).removeClass("d-none");
         }
     }
@@ -577,43 +710,15 @@ function onClickSearchButtonVm() {
                 $(listaChecks[i]).addClass("d-none");
             }
         }
+        for(let i = 0; i < listaChecksGroups.length; i++) {
+            if($(listaChecksGroups[i]).attr("name") !== $("#buscadorVm").val()){
+                $(listaChecksGroups[i]).addClass("d-none");
+            }
+        }
     }
 }
 
-function onClickSearchButtonGroup() {
-    
-    let listaChecks = $("#addNewGroup > li");
-    
-    if($("#buscadorGroup").val() === "" || $("#buscadorGroup").val() === null) {
-        for(let elem of listaChecks) {
-            $(elem).removeClass("d-none");
-        }
-    }
-    else {
-        for(let i = 0; i < listaChecks.length; i++) {
-            if($(listaChecks[i]).attr("name") !== $("#buscadorGroup").val()){
-                $(listaChecks[i]).addClass("d-none");
-            }
-        }
-    }
-}
-function onClickSearchButtonGroupVm() {
-    
-    let listaChecks = $("#listaGruposM > li");
-    
-    if($("#buscadorGroupVm").val() === "" || $("#buscadorGroupVm").val() === null) {
-        for(let elem of listaChecks) {
-            $(elem).removeClass("d-none");
-        }
-    }
-    else {
-        for(let i = 0; i < listaChecks.length; i++) {
-            if($(listaChecks[i]).attr("name") !== $("#buscadorGroupVm").val()){
-                $(listaChecks[i]).addClass("d-none");
-            }
-        }
-    }
-}
+
 function onClickLinkVm() {
     
     let listaChecks = $("#listaVMModal > li > input");
@@ -637,6 +742,8 @@ function onClickLinkVm() {
     
     
 }
+
+
 function handleDrop() {
     
     $(".droppable").droppable({
@@ -651,5 +758,63 @@ function handleDrop() {
     });
     
 }
+
+//
+// --- Validación de formularios ---
+//
+const parsleyForBootstrap4 = {
+  errorClass: 'is-invalid text-danger',
+  successClass: 'is-valid',
+  errorsWrapper: '<span class="form-text text-danger"></span>',
+  errorTemplate: '<span></span>',
+  trigger: 'change'
+}
+
+// activa validacion del formulario con id exampleForm
+//$("#exampleForm").parsley(parsleyForBootstrap4);
+//$("#addForm").parsley(parsleyForBootstrap4);
+//$("#rmForm").parsley(parsleyForBootstrap4);
+
+// define un validador llamado palindrome, que se activa usando
+// un atributo data-parsley-palindrome="" en el campo a validar
+window.Parsley.addValidator('palindrome', {
+  validateString: function(value) {
+    return value.split('').reverse().join('') === value;
+  },
+  messages: {
+    en: 'This string is not the reverse of itself',
+    es: "Eso no es un palíndromo, listillo"
+  }
+});
+
+// define un validador llamado newname, que se activa usando
+// un atributo data-parsley-newname="" en el campo a validar
+window.Parsley.addValidator('newname', {
+  validateString: function(value) {
+    let names = new Set();
+    state.vms.forEach(vm => names.add(vm.name))
+    state.groups.forEach(group => names.add(group.name))
+    return ! names.has(value);
+  },
+  messages: {
+    en: 'Chosen name already exists. Find another',
+    es: "Ese nombre ya existe. Elige otro"
+  }
+});
+
+// define un validador llamado oldname, que se activa usando
+// un atributo data-parsley-oldname="" en el campo a validar
+window.Parsley.addValidator('oldname', {
+  validateString: function(value) {
+    let names = new Set();
+    state.vms.forEach(vm => names.add(vm.name))
+    state.groups.forEach(group => names.add(group.name))
+    return names.has(value);
+  },
+  messages: {
+    en: 'Chosen name does not exist. Use a valid VM or group name',
+    es: "Ese nombre no existe, y no puedes borrar la VM o grupo correspondiente"
+  }
+});
 
 });

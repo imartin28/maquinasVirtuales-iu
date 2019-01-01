@@ -48,10 +48,10 @@
               </div>
               
               <div class="panel-estados ml-4 mb-4 mt-4 ">
-                  <button class="btn boton-icono boton-encender mt-2 mr-3"><i class="material-icons">play_arrow</i>Play</button>
-                  <button class="btn boton-icono boton-reiniciar mt-2 mr-3"><i class="material-icons">replay</i>Restart</button>
-                  <button class="btn boton-icono boton-suspender mt-2 mr-3"><i class="material-icons">pause</i>Suspend</button>
-                  <button class="btn boton-icono boton-apagar mt-2 mr-3"><i class="material-icons">stop</i>Stop</button>
+                  <button class="btn boton-icono boton-encender mt-2 mr-3" id="play"><i class="material-icons">play_arrow</i>Play</button>
+                  <button class="btn boton-icono boton-reiniciar mt-2 mr-3" id="restart"><i class="material-icons">replay</i>Restart</button>
+                  <button class="btn boton-icono boton-suspender mt-2 mr-3" id="suspend"><i class="material-icons">pause</i>Suspend</button>
+                  <button class="btn boton-icono boton-apagar mt-2 mr-3" id="stop"><i class="material-icons">stop</i>Stop</button>
               </div>       
              
               <div class="col-12">
@@ -84,7 +84,7 @@
 	                   <div class="form-group row ">
 	                       
 	                       <div class="col-12 justify-content-center">
-	                         <input type="text" class=" form__email" id="nombreGrupoM" placeholder="Name">
+	                         <input type="text" class=" form__email" id="nombreGrupoM" placeholder="Name" data-parsley-newname="">
 	                       </div>
 	                   </div>
 	                       
@@ -117,12 +117,12 @@
 										</div>
 										<div class="row justify-content-center">
 											<div class="col-4">
-											<p>Vms</p>
+											<p>Groups</p>
 											<form class="">
 												<div class="form-group row">
 													<div>
 													
-													  <ul class="list-group" id="listaVMModal">
+													  <ul class="list-group"  id="groupsTolink">
                               
 																				  
 													  </ul>
@@ -131,12 +131,12 @@
 											</form>	
 											</div>
 											<div class="col-4">
-											<p>Groups</p>
+											<p>Vms</p>
 											<form class="">
 												<div class="form-group row">
 													<div>
 													
-													  <ul class="list-group" id="groupsTolink">
+													  <ul class="list-group" id="listaVMModal">
                               
 																				  
 													  </ul>
