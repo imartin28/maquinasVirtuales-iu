@@ -293,7 +293,7 @@ const Action = {
  * @param {Function} errorFn a llamar si el resultado describe un error
  */
 function handleResult(result, successFn, errorFn) {
-	console.log("result: ", result)
+	
 	if (result.error) {
 		// error, .message nos indicará el problema
 		errorFn(result.message);
@@ -368,10 +368,10 @@ $(function(){
         console.log("New state: ", state); 
         try {
           for (const id of ids) {
-        	  console.log("processing id " + id);
+        	  
 	          $(id).empty();
 	          for(let i = 0; i < state.vms.length; i++) {
-	        	  console.log(state.vms[i].status);
+	        	  
 	        	  let o = $(crearLista(state.vms[i].name, state.vms[i].status,i));
 	        	  $(id).append(o);
 	          }
@@ -379,6 +379,86 @@ $(function(){
     	  $(".draggableVm").draggable({
               tolerance: "touch"
           }).disableSelection();
+    	  
+    	  $("#listaVM > li > input").on("change", function(){
+              let index = $( "input:checked" ).attr("index");
+             //console.log($("#listaVM > li").length);
+             
+              let vm = state.vms[index];
+              //console.log($( "input:checked" ).val())
+    		  //console.log($( "input:checked" ).attr("index"))
+              if( $(this).is(':checked') ) {
+            	  /*$( "#listaVM > li" ).each(function() {
+            		  
+            		  if( !$(this).find("input").is(':checked')){
+            			  $(this).find("input").attr('disabled', true);
+            		  }
+            		});*/
+            	 
+                  $("#nameVM").val(vm.name);
+                  $("#nameVM").prop('disabled', true);
+                  $("#inputRAM").val(vm.ram);
+                  $("#inputRAM").prop('disabled', true);
+                  $("#formControlRange").val(vm.ram);
+                  $("#formControlRange").prop('disabled', true);
+                  $("#inputHDD").val(vm.hdd);
+                  $("#inputHDD").prop('disabled', true);
+                  $("#storageRange").val(vm.hdd);
+                  $("#storageRange").prop('disabled', true);
+                  $("#inputCPUNumber").val(vm.cpu);
+                  $("#inputCPUNumber").prop('disabled', true);
+                  $("#rangeCPU").val(vm.cpu);
+                  $("#rangeCPU").prop('disabled', true);
+                  $("#inputCoresNumber").val(vm.cores);
+                  $("#inputCoresNumber").prop('disabled', true);
+                  $("#rangeCores").val(vm.cores);
+                  $("#rangeCores").prop('disabled', true);
+                  $("#inputIP").val(vm.ip);
+                  $("#inputIP").prop('disabled', true);
+                  $("#isoVM").prop('disabled', true);
+                  $("#panelDerechoBotones").addClass('d-none');
+                  
+              }
+              else{
+            	  	/*$( "#listaVM > li" ).each(function() {
+            		  
+            		 
+            			  $(this).find("input").attr('disabled', false);
+            		  
+            		});*/
+                 // $("#listaVM").find("input").removeClass("checked");
+                  $("#nameVM").val($("#nameVM").attr("default"));
+                  $("#nameVM").prop('disabled', false);
+                  $("#inputRAM").val($("#inputRAM").attr("default"));
+                  $("#inputRAM").prop('disabled', false);
+                  $("#formControlRange").val($("#formControlRange").attr("default"));
+                  $("#formControlRange").prop('disabled', false);
+                  $("#inputHDD").val($("#inputHDD").attr("default"));
+                  $("#inputHDD").prop('disabled', false);
+                  $("#storageRange").val($("#storageRange").attr("default"));
+                  $("#storageRange").prop('disabled', false);
+                  $("#inputCPUNumber").val($("#inputCPUNumber").attr("default"));
+                  $("#inputCPUNumber").prop('disabled', false);
+                  $("#rangeCPU").val($("#rangeCPU").attr("default"));
+                  $("#rangeCPU").prop('disabled', false);
+                  $("#inputCoresNumber").val($("#inputCoresNumber").attr("default"));
+                  $("#inputCoresNumber").prop('disabled', false);
+                  $("#rangeCores").val($("#rangeCores").attr("default"));
+                  $("#rangeCores").prop('disabled', false);
+                  $("#inputIP").val($("#inputIP").attr("default"));
+                  $("#inputIP").prop('disabled', false);
+                  $("#isoVM").prop('disabled', false);
+                  $("#panelDerechoBotones").removeClass('d-none');
+         
+              }
+/*
+              if( $("#inputRAM").val($("#inputRAM").attr("default"))){
+                  $("#panelDerechoBotones").addClass('d-none');
+              }
+              else {
+                  $("#panelDerechoBotones").removeClass('d-none');
+              }*/
+          });
         } catch (e) {
           console.log(e);
         }
@@ -449,70 +529,18 @@ $(function(){
 
         //handle ranges
         
-        handleRangeChange('#formControlRange', '#inputRAM', navigator.deviceMemory*1024, 1025);
+        handleRangeChange('#formControlRange', '#inputRAM', navigator.deviceMemory, navigator.deviceMemory/2);
         handleRangeChange('#storageRange', '#inputHDD', 500, 80);
         handleRangeChange('#rangeCPU', '#inputCPUNumber', 100, 40);
         handleRangeChange('#rangeCores', '#inputCoresNumber', navigator.hardwareConcurrency, 1);
 
-        $("input#chk").on("change", function(){
-            let index = $(this).attr("index");
-            console.log(state.vms[0].name);
-            let vm = state.vms[index];
-            console.log(vm);
-            console.log($("#listaVM > li > .checked").length)
-
-            
-
-            if($(this).find("input").get()[0].checked) {
-                $(this).find("input").addClass("checked");
-                $("#nameVM").val(vm.name);
-                $("#nameVM").prop('disabled', true);
-                $("#inputRAM").val(vm.ram);
-                $("#inputRAM").prop('disabled', true);
-                $("#formControlRange").val(vm.ram);
-                $("#formControlRange").prop('disabled', true);
-                $("#inputHDD").val(vm.hdd);
-                $("#inputHDD").prop('disabled', true);
-                $("#storageRange").val(vm.hdd);
-                $("#storageRange").prop('disabled', true);
-                $("#inputCPUNumber").val(vm.cpu);
-                $("#inputCPUNumber").prop('disabled', true);
-                $("#rangeCPU").val(vm.cpu);
-                $("#rangeCPU").prop('disabled', true);
-                $("#inputCoresNumber").val(vm.cores);
-                $("#inputCoresNumber").prop('disabled', true);
-                $("#rangeCores").val(vm.cores);
-                $("#rangeCores").prop('disabled', true);
-                $("#inputIP").val(vm.ip);
-                $("#inputIP").prop('disabled', true);
-                $("#isoVM").prop('disabled', true);
-                //$("#isoVM").val(vm.iso);
-            }
-            else{
-                $(this).find("input").removeClass("checked");
-                $("#nameVM").val($("#nameVM").attr("default"));
-                $("#inputRAM").val($("#inputRAM").attr("default"));
-                $("#formControlRange").val($("#formControlRange").attr("default"));
-                $("#inputHDD").val($("#inputHDD").attr("default"));
-                $("#storageRange").val(vm.hdd);
-                $("#inputCPUNumber").val($("#inputCPUNumber").attr("default"));
-                $("#inputCoresNumber").val($("#inputCoresNumber").attr("default"));
-                $("#inputIP").val($("#inputIP").attr("default"));
-            }
-
-            if( $("#inputRAM").val($("#inputRAM").attr("default"))){
-                $("#panelDerechoBotones").addClass('d-none');
-            }
-            else {
-                $("#panelDerechoBotones").removeClass('d-none');
-            }
-        });
+        
 
     }
 
     function loadVmData(ulId) {
         $(ulId).empty();
-        console.log(ulId);
+       
         for(let i = 0; i < state.vms.length; i++) {
             let vm = data.vms[i];
             $(ulId).append(crearLista(vm.name, vm.status, i));
@@ -530,13 +558,13 @@ $(function(){
     function crearLista(name, status, index) {
        
         if (status == "start" || status == "reset") {
-            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
+            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk' value="+name+" index="+index+"></input>" + name + "<span class='badge badge-success mt-1'> </span> </li>";
         } 
         else if (status == "suspend"){
-            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' name='chk'></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
+            return "<li class= 'list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk' value="+name+" index="+index+"></input>" + name + "<span class='badge badge-warning mt-1'> </span> </li>";
         }
         else{
-            return "<li class='list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk'></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
+            return "<li class='list-group-item list-vms draggableVm' name="+name+" index="+index+"> <input type='checkbox' id='chk' name='chk' value="+name+" index="+index+"></input>" + name + "<span class='badge badge-danger mt-1'> </span> </li>";
         }
     
     }
@@ -559,7 +587,7 @@ $(function(){
                 status.removeClass("badge-warning");
                 status.removeClass("badge-danger");
                 status.addClass("badge-success");
-                list(url).then(r => update(r, ["#listaVM", "#listaVMModal"]));
+                //list(url).then(r => update(r, ["#listaVM", "#listaVMModal"]));
             }
         }
     }
@@ -673,8 +701,9 @@ $(function(){
     
         $(".droppable").droppable({
             drop: function(event, ui) {
-                let index = $(ui.draggable).attr('index');
-                data.vms.splice(index, 1);
+            	const name = $(ui.draggable).attr("name");
+            	
+                rm(url,[name]).then(r => update(r, ["#listaVM", "#listaVMModal"]));
                 $(ui.draggable).remove();
             }
         });

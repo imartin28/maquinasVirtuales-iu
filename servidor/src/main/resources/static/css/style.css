@@ -295,7 +295,9 @@ input[type='number']{
 
 
 
-
+.addFlex{
+	flex-direction:column;
+}
 
 
 

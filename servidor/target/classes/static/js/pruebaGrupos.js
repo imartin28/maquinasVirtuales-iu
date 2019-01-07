@@ -718,6 +718,39 @@ function onClickSearchButtonVm() {
     }
 }
 
+function check(result, nombreGrupo, arrayVm) {
+	handleResult(result, 
+	    r => {
+	    	
+	      state = r; 
+	      //console.log("New state: ", state); 
+	      try {
+	    	  let encontrado = false;
+	    	  for(let i = 0; i < state.groups.length; ++i){
+	    		  if(state.groups[i].name == nombreGrupo) {
+	    			  for(let j = 0; j < state.groups[i].elements.length; ++j) {
+	    				  for(let k = 0; k < arrayVm.length; ++k) {
+	    					  if(state.groups[i].elements[j] == arrayVm[k]) {
+	    						  encontrado = true;
+	    					  }
+	    						  
+	    				  }
+	    			  }
+	    		  }
+	    	  }
+	    	 
+	    	  if (!encontrado) {
+	    		  link(url, arrayVm, nombreGrupo).then(r => updateGroup(r));
+	    	  }
+	      }
+	        
+	      catch (e) {
+	        console.log(e);
+	      }
+	    },
+	    m => console.log("BUAAAAA - ", m))
+}
+
 
 function onClickLinkVm() {
     
@@ -735,7 +768,8 @@ function onClickLinkVm() {
     for(let elem of grupo) {
         if($(elem).get()[0].checked) {
         	let nombreGrupo = $(elem).parent().attr("name");
-        	link(url, arrayVm, nombreGrupo).then(r => updateGroup(r));
+        	list(url).then(r => check(r, nombreGrupo, arrayVm));
+        	
         	
         }
     }

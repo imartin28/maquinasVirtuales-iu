@@ -243,29 +243,9 @@
 							
 								<!-- fin del Modal -->
 						
-							<button type="button"  class="btn btn-danger boton-icono mb-3 ml-5 droppable" data-toggle="modal" data-target="#deleteVM"><i class="material-icons align-middle">delete_outline</i>Delete VM</button>
+							<button type="button"  class="btn boton-icono delete mt-2 droppable ml-5" data-toggle="modal tooltip" data-placement="top" title="Arrastra aqui para borrar" data-target="#deleteVM"><i class="material-icons align-middle">delete_outline</i>Delete VM</button>
 
-							<!-- Modal delete  -->
-							<div class="modal fade" id="deleteVM" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Delete VM</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-											 <p>Are you sure you want to delete it?</p>
-											</div>
-											<div class="modal-footer">
-													<button type="button" class="btn boton-grupos mx-2 col-3">Delete</button>
-													<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--fin del modal -->
+							
 						</div>
 				  </div>
 				</div>
@@ -292,7 +272,7 @@
 				  <div class="col-3 row d-flex flex-row align-items-center flex-nowrap">
 						
 							<input type="number" class="col-12 form-control" id="inputRAM">
-							<span class="col-1">MB</span>
+							<span class="col-1">GB</span>
 							
 						
 						
