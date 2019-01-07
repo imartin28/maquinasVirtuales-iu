@@ -702,7 +702,7 @@ $(function(){
         $(".droppable").droppable({
             drop: function(event, ui) {
             	const name = $(ui.draggable).attr("name");
-            	
+            	    
                 rm(url,[name]).then(r => update(r, ["#listaVM", "#listaVMModal"]));
                 $(ui.draggable).remove();
             }

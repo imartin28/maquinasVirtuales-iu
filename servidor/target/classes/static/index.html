@@ -54,98 +54,14 @@
 				  <h2>VM's</h2>
 				  <div class="row">
 						<ul class="list-group col-6 align-items-left" id="listaVM">
-						  <!--<li class="list-group-item list-vms" data-nodeid="1">
-									<input type="checkbox">
-									<span class="">VM 1</span>
-									<span class="badge badge-success mt-1"> </span>
-							</li>
-							<li class="list-group-item list-vms" data-nodeid="2">
-									<input type="checkbox" >
-									<span class="">VM 2</span>
-									<span class="badge badge-warning mt-1"> </span>
-							</li>
-							<li class="list-group-item list-vms" data-nodeid="3">
-									<input type="checkbox" >
-									<span class="">Ubuntu</span>
-									<span class="badge badge-danger mt-1"> </span>
-						  </li>
-							<li class="list-group-item list-vms" data-nodeid="4">
-									<input type="checkbox" >
-									<span class="">Windows</span>
-									<span class="badge badge-danger mt-1"> </span>
-						  </li> -->
+						  
 						 
 						</ul>
 						<div class="col-6 panel-botones-vm">
-							<button type="button" id="botonModificar" class="btn boton-grupos boton-icono mb-3 ml-5 "> <i class="material-icons align-middle">edit</i>Modify MV</button>
-							<button type="button" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#addGroupModal">
-								<i class="material-icons align-middle">add_circle</i>Add Group
-							</button>
+							
+							
 
-							<!-- Modal add new group-->
-							<div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLongTitle">Add new group</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-										<div class="input-group search-bar mb-3 mx-auto form-group search-modal">
-													  <input type="text" class="form-control" placeholder="Search...">
-													  <div class="input-group-append">
-															<button class="btn boton-buscar" type="button">
-															 <i class="material-icons">search</i>
-															</button>
-													  </div>
-										</div>
-											<div class="row justify-content-center">
-											<form class="">
-												<div class="form-group row">
-													<div>
-													
-													  <ul id="listaGruposVM" class="list-group">
-														<li class="list-group-item list-modal" data-nodeid="0">
-														  <input type="checkbox" >                     
-														  <span>Group1 </span>	  
-														</li>
-														
-														<li class="list-group-item list-modal" data-nodeid="4">
-															<input type="checkbox" >
-														  <span>Group2</span>
-														</li>
-														<li class="list-group-item list-modal" data-nodeid="4">
-															<input type="checkbox" >
-														  <span>Group3</span>
-														  
-														</li>
-														<li class="list-group-item list-modal" data-nodeid="5">
-															<input type="checkbox" >
-														  <span >Group4</span>
-														  
-														</li>
-														<li class="list-group-item list-modal" data-nodeid="6">
-															<input type="checkbox" >
-														  <span >Group5</span>             
-														  
-														</li>
-													  
-													  </ul>
-													</div>      
-												</div>
-											</form>	
-											</div>
-											<div class="d-flex flex-row justify-content-center mt-2">
-												<button type="button" class="btn boton-grupos mx-2 col-3">Save</button>
-												<button type="button" class="btn boton-cancelar mx-2 col-3" data-dismiss="modal">Cancel</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- fin del Modal -->
+							
 							<button type="button" id="btnExport" class="btn boton-grupos boton-icono mb-3 ml-5" data-toggle="modal" data-target="#ExportModal">
 								<i class="material-icons align-middle">format_indent_decrease</i>Export
 							</button>
@@ -173,31 +89,13 @@
 											<div class="row justify-content-center">
 											<form class="">
 												<div class="form-group row">
-													<div>
+													
 													
 													  <ul id="listaVMModal" class="list-group">
-														<li class="list-group-item list-modal" data-nodeid="8">
-														  <input type="checkbox" >                     
-														  <span>VM1 </span>	  
-														</li>
 														
-														<li class="list-group-item list-modal" data-nodeid="9">
-															<input type="checkbox" >
-														  <span>VM2</span>
-														</li>
-														<li class="list-group-item list-modal" data-nodeid="10">
-															<input type="checkbox" >
-														  <span>Ubuntu</span>
-														  
-														</li>
-														<li class="list-group-item list-modal" data-nodeid="11">
-															<input type="checkbox" >
-														  <span >Windows</span>
-														  
-														</li>
 														
 													  </ul>
-													</div>      
+													     
 												</div>
 											</form>	
 											</div>
@@ -328,8 +226,8 @@
                 <div class="form-group row">
                     <label  class="col-3 col-form-label">ISO</label>
                     <div class="col-9">
-											<input type="file" class="custom-file-input" id="isoVM">
-											<label class="custom-file-label" for="customFile">Choose file</label>
+						<input type="file" class="custom-file-input" id="isoVM">
+					    <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>
 			

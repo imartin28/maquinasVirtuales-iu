@@ -22,6 +22,11 @@
     outline:none;
     color:red;
 }
+
+.delete:hover{
+	background-color:red;
+	color: white;
+}
 .header{
     background-image: linear-gradient(to right,white, orange, white);
     height: 160px; 
